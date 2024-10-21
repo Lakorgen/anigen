@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import KinoboxPlayer from "../components/KinoboxPlayer";
 
 const Anime = () => {
   const { id } = useParams();
@@ -28,12 +29,20 @@ const Anime = () => {
   return (
     <div className="anime">
       <div className="anime__header">
-        <img src={`https://shikimori.one${item.image.original}`} alt={item.name} className="anime__image" />
+        <img
+          src={`https://shikimori.one${item.image.original}`}
+          alt={item.name}
+          className="anime__image"
+        />
         <div className="anime__title">
-          <h1>{item.name} ({item.russian})</h1>
+          <h1>
+            {item.name} ({item.russian})
+          </h1>
           <p>Рейтинг: {item.score}</p>
           <p>Статус: {item.status}</p>
-          <p>Эпизоды: {item.episodes} ({item.episodes_aired} вышло)</p>
+          <p>
+            Эпизоды: {item.episodes} ({item.episodes_aired} вышло)
+          </p>
         </div>
       </div>
       <div className="anime__description">
@@ -44,9 +53,16 @@ const Anime = () => {
         <h2>Жанры</h2>
         <ul>
           {item.genres.map((genre) => (
-            <li key={genre.id}>{genre.russian} ({genre.name})</li>
+            <li key={genre.id}>
+              {genre.russian} ({genre.name})
+            </li>
           ))}
         </ul>
+      </div>
+      <br />
+      <div className="aniime_player">
+        <h2>Смотреть онлайн</h2>
+        <KinoboxPlayer title={item.russian}/>
       </div>
       <div className="anime__videos">
         <h2>Тизеры</h2>
