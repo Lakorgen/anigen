@@ -9,11 +9,21 @@
   background: #FFAE8C;
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px;
 
+  @media (max-width: 450px){
+    height: 110px;
+  }
+
   &__inner {
     display: grid;
     align-items: center;
     grid-template-columns: 150px 1fr 100px;
     height: 100%;
+
+    @media (max-width: 450px){
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   &__logo {

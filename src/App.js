@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Catalog from "./pages/Catalog";
+import Anime from "./pages/Anime";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/catalog" element={<Catalog />} />
+            <Route path="/anime/:id" element={<Anime />} />
             {/* <Route path="*" element={<NotFinded />} /> */}
           </Routes>
         </div>

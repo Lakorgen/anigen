@@ -18,19 +18,7 @@ const Home = () => {
           return item && <PopularCard key={item.id} {...item} />;
         })}
       </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis aut
-        itaque dignissimos nulla sint? Veniam cum dolores beatae temporibus
-        commodi sint hic magni exercitationem modi obcaecati, et non numquam
-        possimus impedit aliquam fugit quaerat unde aspernatur eligendi
-        cupiditate quae ipsa ea! Natus culpa officia saepe earum ullam,
-        repudiandae blanditiis commodi quisquam sint, amet libero id quasi iusto
-        autem nihil alias eaque tempora, ea dolor doloremque nisi! Omnis quasi
-        aspernatur autem sequi labore, consequatur accusantium perspiciatis modi
-        quam tempore aliquid unde quia aliquam deleniti hic et culpa vero illo
-        provident eveniet? Similique, soluta commodi quibusdam consectetur
-        provident fugit deserunt aliquam tenetur!
-      </p>
+      <p>тут что-то когда-то будет, а пока перейдите в каталог или профиль</p>
     </>
   );
 };

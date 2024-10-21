@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProfileCard = ({ russian, image, kind, score }) => {
+const ProfileCard = ({id, russian, image, kind, score }) => {
   return (
-    <Link to="#" className="profile__card">
+    <Link to={`/anime/${id}`} className="profile__card">
       <div className="profile__card-img">
         <img src={"https://shikimori.one/" + image.original} alt="" />
       </div>
