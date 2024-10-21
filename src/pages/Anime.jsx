@@ -62,7 +62,7 @@ const Anime = () => {
       <br />
       <div className="aniime_player">
         <h2>Смотреть онлайн</h2>
-        <KinoboxPlayer title={item.russian}/>
+        <KinoboxPlayer title={item.name} />
       </div>
       <div className="anime__videos">
         <h2>Тизеры</h2>
