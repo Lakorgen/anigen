@@ -16,6 +16,11 @@
   padding: 0 15px;
 }
 
+.content{
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
 .popular {
   &__cards {
     display: flex;
@@ -131,13 +136,18 @@
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
+    margin-bottom: 20px;
   }
 
   &__img {
     position: relative;
+    overflow: hidden;
+    border-radius: 8px;
     img {
       width: 50px;
       height: 50px;
+      object-fit: cover;
+      object-position: cover;
     }
   }
   &__info {
@@ -167,7 +177,6 @@
     grid-template-rows: auto 1fr;
     grid-template-columns: 150px 1fr;
     align-items: flex-start;
-    padding: 20px 0;
 
     @media (max-width: 600px) {
       display: flex;

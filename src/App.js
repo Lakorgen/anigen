@@ -5,10 +5,12 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Catalog from "./pages/Catalog";
 import Anime from "./pages/Anime";
+import MobileMenu from "./components/MobileMenu";
 
 function App() {
   return (
     <div>
+      <MobileMenu />
       <Header />
       <div className="content">
         <div className="container">

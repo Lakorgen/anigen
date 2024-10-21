@@ -10,20 +10,16 @@
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px;
 
   @media (max-width: 450px){
-    height: 110px;
+    display: none;
   }
 
   &__inner {
     display: grid;
     align-items: center;
-    grid-template-columns: 150px 1fr 100px;
+    grid-template-columns: 150px 1fr 50px;
     height: 100%;
 
-    @media (max-width: 450px){
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    
   }
 
   &__logo {
@@ -54,9 +50,10 @@
   }
 
   &__profile {
-    font-weight: 600;
-    text-align: end;
-    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
     border-radius: 8px;
     transition: all 0.2s ease-in-out;
     &:hover {

@@ -59,7 +59,7 @@ const Profile = () => {
         <div className="profile__top">
           <div className="profile__img">
             <img
-              src="https://cover.imglib.info/static/images/placeholders/user_avatar.png"
+              src="img/scale_2400.jpg"
               alt="Аватар пользователя"
               loading="lazy"
             />
