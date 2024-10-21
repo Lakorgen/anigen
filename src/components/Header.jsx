@@ -6,7 +6,7 @@ const Header = () => {
     <header className="header">
       <div className="header__inner container">
         <Link to="/" className="header__logo">
-          Anigen
+          AniGen
         </Link>
         <ul className="header__list">
           <li className="header__item">

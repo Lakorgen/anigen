@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProfileCard from "../components/ProfileCard";
+import SkeletonProfile from "../components/ProfileCard/SkeletonProfile";
 import SidebarCatalog from "../components/SidebarCatalog";
 
 const Catalog = () => {
@@ -43,16 +44,23 @@ const Catalog = () => {
 
   useEffect(() => {
     const status = categoriesStatusMap[activeCategory]; // Получаем статус по активной категории
-    fetchItems(page, status); // Загрузка первой страницы при монтировании компонента
-  }, [page, activeCategory]); // Добавляем activeCategory в зависимости
+    setLoading(true); // Включаем индикатор загрузки при смене категории
+    setPage(1); // Сбрасываем номер страницы
+    fetchItems(1, status); // Загружаем первую страницу при смене категории
+  }, [activeCategory]); // Добавляем activeCategory в зависимости
+
+  useEffect(() => {
+    const status = categoriesStatusMap[activeCategory]; // Получаем статус по активной категории
+    if (page > 1) {
+      fetchItems(page, status); // Загружаем данные при изменении страницы
+    }
+  }, [page, activeCategory]); // Запрос при изменении page или activeCategory
 
   const handleScroll = () => {
-    // Проверяем, достиг ли пользователь конца страницы
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = document.documentElement.scrollTop;
     const clientHeight = document.documentElement.clientHeight;
 
-    // Если пользователь достиг конца страницы
     if (scrollTop + clientHeight >= scrollHeight - 5 && !isFetching) {
       setPage((prevPage) => prevPage + 1); // Увеличиваем номер страницы для подгрузки новых данных
     }
@@ -63,11 +71,9 @@ const Catalog = () => {
     return () => window.removeEventListener("scroll", handleScroll); // Убираем слушатель при размонтировании компонента
   }, [isFetching]); // Срабатывает при изменении состояния `isFetching`
 
-  // Функция обработки изменения категории
   const handleCategoryChange = (index) => {
     setActiveCategory(index); // Устанавливаем новую активную категорию
-    setItems([]); // Очищаем предыдущие элементы
-    setPage(1); // Сбрасываем номер страницы
+    setItems([]); // Очищаем предыдущие элементы при смене категории, если это нужно
   };
 
   return (
@@ -76,18 +82,21 @@ const Catalog = () => {
         <div className="profile__wrapper">
           <SidebarCatalog 
             categoryActive={activeCategory} 
-            setCategoryActive={handleCategoryChange} // Передаем новую функцию
+            setCategoryActive={handleCategoryChange} 
           />
           <div className="profile__content">
             <div className="profile__cards">
-              {loading && <div>Загрузка...</div>} {/* Индикатор загрузки */}
+              {/* Отображаем скелетоны во время загрузки */}
+              {loading && 
+                [...Array(6)].map((_, index) => <SkeletonProfile key={index} />)
+              }
+              {/* Отображаем карточки профиля, когда данные загружены */}
+              {!loading &&
+                items.map((item) => <ProfileCard key={item.id} {...item} />)
+              }
               {error && <div>Ошибка: {error}</div>} {/* Сообщение об ошибке */}
-              {items.map((item) => {
-                return item && <ProfileCard key={item.id} {...item} />;
-              })}
             </div>
-            {isFetching && <div>Загружаем ещё...</div>}{" "}
-            {/* Индикатор загрузки следующей страницы */}
+            {isFetching && <div>Загружаем ещё...</div>} {/* Индикатор загрузки следующей страницы */}
           </div>
         </div>
       </div>

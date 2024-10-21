@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProfileCard from "../components/ProfileCard";
+import SkeletonProfile from "../components/ProfileCard/SkeletonProfile";
 import Sidebar from "../components/Sidebar";
 
 const Profile = () => {
@@ -66,7 +67,7 @@ const Profile = () => {
           </div>
           <div className="profile__info">
             <strong className="profile__name">Lakorgen</strong>
-            <div className="profile__lvl"> Уровень 999 • Топ 3</div>
+            <div className="profile__lvl">Уровень 999 • Топ 3</div>
           </div>
         </div>
 
@@ -74,14 +75,15 @@ const Profile = () => {
           <Sidebar />
           <div className="profile__content">
             <div className="profile__cards">
-              {loading && <div>Загрузка...</div>} {/* Индикатор загрузки */}
+              {loading && 
+                [...Array(6)].map((_, index) => <SkeletonProfile key={index} />)
+              } {/* Отображаем скелетоны во время загрузки */}
               {error && <div>Ошибка: {error}</div>} {/* Сообщение об ошибке */}
-              {items.map((item) => {
-                return item && <ProfileCard key={item.id} {...item} />;
-              })}
+              {items.map((item) => (
+                <ProfileCard key={item.id} {...item} />
+              ))}
             </div>
-            {isFetching && <div>Загружаем ещё...</div>}{" "}
-            {/* Индикатор загрузки следующей страницы */}
+            {isFetching && <div>Загружаем ещё...</div>} {/* Индикатор загрузки следующей страницы */}
           </div>
         </div>
       </div>
