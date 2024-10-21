@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/anigen/static/css/main.0f23f6e2.css",
+    "main.js": "/anigen/static/js/main.92a6c998.js",
+    "index.html": "/anigen/index.html",
+    "main.0f23f6e2.css.map": "/anigen/static/css/main.0f23f6e2.css.map",
+    "main.92a6c998.js.map": "/anigen/static/js/main.92a6c998.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f23f6e2.css",
+    "static/js/main.92a6c998.js"
+  ]
+}
