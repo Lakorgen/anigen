@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/anigen/static/css/main.0f23f6e2.css",
-    "main.js": "/anigen/static/js/main.92a6c998.js",
+    "main.css": "/anigen/static/css/main.81490cd0.css",
+    "main.js": "/anigen/static/js/main.deae4218.js",
     "index.html": "/anigen/index.html",
-    "main.0f23f6e2.css.map": "/anigen/static/css/main.0f23f6e2.css.map",
-    "main.92a6c998.js.map": "/anigen/static/js/main.92a6c998.js.map"
+    "main.81490cd0.css.map": "/anigen/static/css/main.81490cd0.css.map",
+    "main.deae4218.js.map": "/anigen/static/js/main.deae4218.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f23f6e2.css",
-    "static/js/main.92a6c998.js"
+    "static/css/main.81490cd0.css",
+    "static/js/main.deae4218.js"
   ]
 }
