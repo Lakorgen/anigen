@@ -16,7 +16,7 @@
   padding: 0 15px;
 }
 
-.content{
+.content {
   margin-top: 20px;
   margin-bottom: 80px;
 }
@@ -166,6 +166,18 @@
     width: 100%;
     color: #8a8a8e;
     font-size: 13px;
+  }
+
+  &__btn {
+    background: rgba(116, 116, 128, 0.05);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: rgba(116, 116, 128, 0.1);
+    }
   }
 
   &__wrapper {

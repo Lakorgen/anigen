@@ -79,11 +79,11 @@ const Profile = () => {
           </div>
 
           {isAuth ? (
-            <button onClick={() => dispatch(removeUser())}>
+            <button className="profile__btn" onClick={() => dispatch(removeUser())}>
               Выйти из аккаунта
             </button>
           ) : (
-            <Link to={"/login"}>Войти в аккаунт</Link>
+            <Link className="profile__btn" to={"/login"}>Войти в аккаунт</Link>
           )}
         </div>
 
