@@ -1,26 +1,72 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import KinoboxPlayer from "../components/KinoboxPlayer";
+import { doc, getDoc, setDoc } from "firebase/firestore"; // Firestore methods
+import { db } from "../firebase"; // импорт Firestore из firebase.js
+import { useSelector } from "react-redux"; // для получения текущего пользователя
 
 const Anime = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
+  const [status, setStatus] = useState("");
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    fetch(`https://shikimori.one/api/animes/${id}`)
-      .then((res) => {
-        if (!res.ok) {
+    const fetchAnimeData = async () => {
+      try {
+        const response = await fetch(`https://shikimori.one/api/animes/${id}`);
+        if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return res.json();
-      })
-      .then((json) => {
+        const json = await response.json();
         setItem(json);
-      })
-      .catch((error) => {
+        
+        // Проверяем, есть ли аниме в Firestore
+        if (user.id) {
+          const animeRef = doc(db, "users", user.id, "anime", id); // путь к документу аниме для пользователя
+          const animeDoc = await getDoc(animeRef);
+          if (animeDoc.exists()) {
+            const animeData = animeDoc.data();
+            setStatus(animeData.status); // Устанавливаем статус из Firestore
+          }
+        }
+      } catch (error) {
         console.error("Ошибка при получении данных:", error);
-      });
-  }, [id]);
+      }
+    };
+
+    fetchAnimeData();
+  }, [id, user.id]); // Добавляем user.id в зависимости
+
+  const handleStatusChange = async (newStatus) => {
+    if (!user.id) {
+      console.error("Пользователь не авторизован");
+      return;
+    }
+
+    const animeRef = doc(db, "users", user.id, "anime", id); // путь к документу аниме для пользователя
+    try {
+      const animeDoc = await getDoc(animeRef);
+      if (animeDoc.exists()) {
+        // Если аниме уже есть в Firestore, обновляем статус
+        await setDoc(animeRef, { status: newStatus }, { merge: true });
+      } else {
+        // Если аниме еще нет, добавляем новый документ с данными
+        await setDoc(animeRef, {
+          id,
+          status: newStatus,
+          russian: item.russian || item.name,
+          image: item.image.original,
+          kind: item.kind,
+          score: item.score,
+        });
+      }
+      setStatus(newStatus); // Обновляем локальное состояние статуса
+      console.log("Статус аниме обновлен");
+    } catch (error) {
+      console.error("Ошибка при обновлении статуса аниме:", error);
+    }
+  };
 
   if (!item) {
     return <div>Загрузка...</div>;
@@ -44,6 +90,20 @@ const Anime = () => {
             Эпизоды: {item.episodes} ({item.episodes_aired} вышло)
           </p>
         </div>
+      </div>
+      <div className="anime__status">
+        <label htmlFor="statusSelect">Добавить в список:</label>
+        <select
+          id="statusSelect"
+          value={status}
+          onChange={(e) => handleStatusChange(e.target.value)}
+        >
+          <option value="">Выберите статус</option>
+          <option value="Просмотренно">Просмотренно</option>
+          <option value="В планах">В планах</option>
+          <option value="Смотрю">Смотрю</option>
+          <option value="Брошено">Брошено</option>
+        </select>
       </div>
       <div className="anime__description">
         <h2>Описание</h2>

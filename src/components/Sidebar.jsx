@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ setSelectedCategory }) => {
   const [categoryActive, setCategoryActive] = useState(0);
-  const categoriesList = ["Все", "Смотрю", "Запланировано", "Просмотрено"];
+  const categoriesList = ["Все", "Смотрю", "В планах", "Просмотренно", "Брошено"];
+
+  const handleCategoryClick = (index, category) => {
+    setCategoryActive(index);
+    setSelectedCategory(category); // Вызов функции из родительского компонента
+  };
 
   return (
     <div className="sidebar">
@@ -11,7 +16,7 @@ const Sidebar = () => {
         {categoriesList.map((categorieName, index) => (
           <div
             key={index}
-            onClick={() => setCategoryActive(index)}
+            onClick={() => handleCategoryClick(index, categorieName)}
             className={
               "sidebar__menu-item " +
               (categoryActive === index ? "sidebar__menu-item--active" : "")

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProfileCard from "../components/ProfileCard";
 import SkeletonProfile from "../components/ProfileCard/SkeletonProfile";
 import SidebarCatalog from "../components/SidebarCatalog";
+import CatalogCard from "../components/CatalogCard";
 
 const Catalog = () => {
   const [items, setItems] = useState([]);
@@ -92,7 +93,7 @@ const Catalog = () => {
               }
               {/* Отображаем карточки профиля, когда данные загружены */}
               {!loading &&
-                items.map((item) => <ProfileCard key={item.id} {...item} />)
+                items.map((item) => <CatalogCard key={item.id} {...item} />)
               }
               {error && <div>Ошибка: {error}</div>} {/* Сообщение об ошибке */}
             </div>
