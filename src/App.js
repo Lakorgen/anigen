@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/slices/userSlice";
+import AnimeRoulette from "./pages/AnimeRoulette";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/random" element={<AnimeRoulette />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/anime/:id" element={<Anime />} />
             {/* <Route path="*" element={<NotFinded />} /> */}
