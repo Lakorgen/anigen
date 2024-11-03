@@ -6,8 +6,22 @@ import Profile from "./pages/Profile";
 import Catalog from "./pages/Catalog";
 import Anime from "./pages/Anime";
 import MobileMenu from "./components/MobileMenu";
+import LoginPage from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
+import { useDispatch } from "react-redux";
+import { setUser } from "./store/slices/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    // Проверяем, есть ли пользователь в localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      // Если данные есть, парсим их и сохраняем в Redux
+      dispatch(setUser(JSON.parse(storedUser)));
+    }
+  }, [dispatch]);
   return (
     <div>
       <MobileMenu />
@@ -16,6 +30,8 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/anime/:id" element={<Anime />} />

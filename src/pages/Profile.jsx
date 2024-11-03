@@ -2,8 +2,15 @@ import React, { useState, useEffect } from "react";
 import ProfileCard from "../components/ProfileCard";
 import SkeletonProfile from "../components/ProfileCard/SkeletonProfile";
 import Sidebar from "../components/Sidebar";
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../store/slices/userSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const userEmail = useSelector((state) => state.user.email);
+  const { isAuth, email } = useAuth();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true); // Состояние загрузки
   const [error, setError] = useState(null); // Состояние для обработки ошибок
@@ -56,6 +63,7 @@ const Profile = () => {
 
   return (
     <div>
+      {/* {!isAuth ? <Navigate to="/login" /> : ""} */}
       <div className="profile">
         <div className="profile__top">
           <div className="profile__img">
@@ -66,24 +74,35 @@ const Profile = () => {
             />
           </div>
           <div className="profile__info">
-            <strong className="profile__name">Lakorgen</strong>
+            <strong className="profile__name">{userEmail || "Аноним"}</strong>
             <div className="profile__lvl">Уровень 999 • Топ 3</div>
           </div>
+
+          {isAuth ? (
+            <button onClick={() => dispatch(removeUser())}>
+              Выйти из аккаунта
+            </button>
+          ) : (
+            <Link to={"/login"}>Войти в аккаунт</Link>
+          )}
         </div>
 
         <div className="profile__wrapper">
           <Sidebar />
           <div className="profile__content">
             <div className="profile__cards">
-              {loading && 
-                [...Array(6)].map((_, index) => <SkeletonProfile key={index} />)
-              } {/* Отображаем скелетоны во время загрузки */}
+              {loading &&
+                [...Array(6)].map((_, index) => (
+                  <SkeletonProfile key={index} />
+                ))}{" "}
+              {/* Отображаем скелетоны во время загрузки */}
               {error && <div>Ошибка: {error}</div>} {/* Сообщение об ошибке */}
               {items.map((item) => (
                 <ProfileCard key={item.id} {...item} />
               ))}
             </div>
-            {isFetching && <div>Загружаем ещё...</div>} {/* Индикатор загрузки следующей страницы */}
+            {isFetching && <div>Загружаем ещё...</div>}{" "}
+            {/* Индикатор загрузки следующей страницы */}
           </div>
         </div>
       </div>

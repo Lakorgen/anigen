@@ -16,6 +16,54 @@ function KinoboxPlayer({ title }) {
           menu: {
             enabled: false,
           },
+          players: {
+            // Настройки источников
+            alloha: {
+              // Название
+              enable: true, // Включить
+              position: 1, // Позиция в меню
+            },
+            kodik: {
+              enable: true,
+              position: 2,
+            },
+            Ashdi: {
+              enable: false,
+              position: 3,
+            },
+            Cdnmovies: {
+              // Название
+              enable: false, // Включить
+              position: 4, // Позиция в меню
+            },
+            Collaps: {
+              enable: false,
+              position: 5,
+            },
+            Hdvb: {
+              // Название
+              enable: false, // Включить
+              position: 6, // Позиция в меню
+            },
+            Turbo: {
+              // Название
+              enable: false, // Включить
+              position: 7, // Позиция в меню
+            },
+            Vibix: {
+              enable: false,
+              position: 8,
+            },
+            Videocdn: {
+              // Название
+              enable: false, // Включить
+              position: 9, // Позиция в меню
+            },
+            Voidboost: {
+              enable: false,
+              position: 10,
+            },
+          },
         });
       }
     };
