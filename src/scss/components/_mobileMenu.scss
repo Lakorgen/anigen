@@ -4,7 +4,7 @@
     
     display: flex;
   }
-  background-color: #fff;
+  background-color: var(--bg-card-color);
   position: fixed;
   z-index: 40;
   bottom: 5px;
@@ -15,6 +15,7 @@
   align-items: center;
 
   ul {
+    color:var(--text-color);
     width: 100%;
     display: flex;
     align-items: end;
@@ -32,6 +33,9 @@
           width: 16px;
           height: 16px;
           opacity: 0.3;
+          path{
+            fill: var(--text-color)
+          }
         }
       }
     }

@@ -23,6 +23,8 @@ function App() {
       dispatch(setUser(JSON.parse(storedUser)));
     }
   }, [dispatch]);
+
+
   return (
     <div>
       <MobileMenu />

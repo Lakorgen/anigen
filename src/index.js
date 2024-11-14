@@ -7,6 +7,9 @@ import App from "./App";
 import { store } from "./store";
 import "./firebase";
 
+const savedTheme = localStorage.getItem("theme") || "light";
+document.body.setAttribute("data-theme", savedTheme);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

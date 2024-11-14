@@ -1,6 +1,7 @@
 @import "./components/all.scss";
 
 body {
+  background-color: var(--bg-color);
   position: relative;
   overflow-x: hidden;
 }
@@ -14,11 +15,12 @@ body {
   overflow: hidden;
   z-index: -1; /* За всеми другими элементами */
 
-  &::before,&::after{
-    content: '';
+  &::before,
+  &::after {
+    content: "";
     position: absolute;
-    width: 150px; /* Размер "шарика" */
-    height: 150px;
+    width: 200px; /* Размер "шарика" */
+    height: 200px;
     border-radius: 50%;
     filter: blur(150px);
   }
@@ -66,7 +68,7 @@ body {
     gap: 16px;
     padding: 22px 26px;
     min-height: 220px;
-    background-color: var(--white);
+    background-color: var(--bg-card-color);
     border-radius: 12px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -135,7 +137,7 @@ body {
       padding-top: 6px;
       max-height: 60px;
       overflow: hidden;
-      color: var(--black);
+      color: var(--text-color);
       text-decoration: none;
       font-size: 14px;
     }
@@ -156,7 +158,7 @@ body {
 
     &-category {
       font-size: 13px;
-      color: var(--black);
+      color: var(--text-color);
       opacity: 0.6;
       display: flex;
       gap: 10px;
@@ -177,7 +179,7 @@ body {
       flex-shrink: 0;
       background: var(--mauve-900);
       font-weight: 500;
-      color: var(--white);
+      color: var(--text-color-white);
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -193,7 +195,7 @@ body {
     border-radius: 8px;
     padding: 22px 26px;
 
-    background-color: var(--white);
+    background-color: var(--bg-card-color);
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
@@ -235,7 +237,7 @@ body {
   }
   &__lvl {
     width: 100%;
-    color: var(--black);
+    color: var(--text-color);
     opacity: 0.6;
     font-size: 12px;
   }
@@ -246,7 +248,7 @@ body {
   }
 
   &__btn {
-    background: var(--white);
+    background: var(--bg-card-color);
     padding: 8px 14px;
     border: var(--mauve-500) 1px solid;
     color: var(--mauve-500);
@@ -286,7 +288,7 @@ body {
   }
   .sidebar {
     position: sticky;
-    background-color: var(--white);
+    background-color: var(  --bg-card-color);
     border-radius: 10px;
     padding: 5px 3px;
     z-index: 20;
@@ -308,7 +310,7 @@ body {
       font-size: 12px;
       line-height: 20px;
       user-select: none;
-      color: var(--black);
+      color: var(--text-color);
       opacity: 0.6;
     }
 
@@ -327,13 +329,13 @@ body {
         text-decoration: none;
         transition: color 0.2s ease, background 0.2s ease;
         cursor: pointer;
-        
-        &:hover{
-          background: var(--mauve-50);
+
+        &:hover {
+          background: var(--bg-sidebar-hover);
         }
 
         &--active {
-          background: var(--mauve-100);
+          background: var(--bg-sidebar-active);
         }
       }
     }
@@ -422,7 +424,7 @@ body {
       padding-top: 6px;
       max-height: 60px;
       overflow: hidden;
-      color: var(--black);
+      color: var(--text-color);
       text-decoration: none;
       font-size: 14px;
     }
@@ -443,7 +445,7 @@ body {
 
     &-category {
       font-size: 13px;
-      color: var(--black);
+      color: var(--text-color);
       opacity: 0.6;
       display: flex;
       gap: 10px;
@@ -464,7 +466,7 @@ body {
       flex-shrink: 0;
       background: var(--mauve-900);
       font-weight: 500;
-      color: var(--white);
+      color: var(--text-color-white);
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -475,9 +477,10 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--white);
+  background-color: var(  --bg-card-color);
   border-radius: 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
 
   h2 {
     color: var(--mauve-500);
@@ -506,12 +509,12 @@ body {
       font-size: 24px;
       margin: 0;
       font-weight: 600;
-      color: var(--mauve-800);
+      color: var(--mauve-600);
     }
 
     p {
       margin: 5px 0;
-      color: var(--black);
+      color: var(--text-color);
       opacity: 0.6;
     }
   }
@@ -545,7 +548,7 @@ body {
         border-radius: 10px;
         text-align: center;
 
-        color: var(--white);
+        color: var(--text-color-white);
         font-weight: 600;
         letter-spacing: -0.2px;
         padding: 10px;
