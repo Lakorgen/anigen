@@ -1,5 +1,44 @@
 @import "./components/all.scss";
 
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.blurred-balls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1; /* За всеми другими элементами */
+
+  &::before,&::after{
+    content: '';
+    position: absolute;
+    width: 150px; /* Размер "шарика" */
+    height: 150px;
+    border-radius: 50%;
+    filter: blur(150px);
+  }
+
+  &::before {
+    top: 5%;
+    left: 10%;
+    background: radial-gradient(circle, var(--mauve-500), transparent);
+  }
+
+  &::after {
+    width: 200px;
+    height: 200px;
+    bottom: 5%;
+    right: 10%;
+    filter: blur(120px);
+    background: radial-gradient(circle, rgba(0, 149, 255, 0.865), transparent);
+  }
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -27,8 +66,8 @@
     gap: 16px;
     padding: 22px 26px;
     min-height: 220px;
-    background-color: #fff;
-    border-radius: 8px;
+    background-color: var(--white);
+    border-radius: 12px;
     margin-top: 20px;
     margin-bottom: 20px;
     overflow: scroll;
@@ -45,7 +84,10 @@
       transform: translateY(-10px);
 
       .popular__card-title {
-        color: #ff5d19;
+        color: var(--mauve-600);
+      }
+      .popular__card-img::after {
+        opacity: 1;
       }
     }
 
@@ -69,6 +111,23 @@
         opacity: 1;
         transition: opacity 0.15s ease-in;
       }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          #d249ec70,
+          #80008000
+        ); // Фиолетовый градиент снизу вверх
+        border-radius: inherit;
+        opacity: 0; // По умолчанию градиент скрыт
+        transition: opacity 0.2s ease-in-out; // Плавный переход для показа градиента
+        pointer-events: none; // Чтобы градиент не блокировал клики
+      }
     }
 
     &-text {
@@ -76,7 +135,7 @@
       padding-top: 6px;
       max-height: 60px;
       overflow: hidden;
-      color: #212529;
+      color: var(--black);
       text-decoration: none;
       font-size: 14px;
     }
@@ -97,7 +156,8 @@
 
     &-category {
       font-size: 13px;
-      color: #8a8a8e;
+      color: var(--black);
+      opacity: 0.6;
       display: flex;
       gap: 10px;
       text-transform: uppercase;
@@ -115,8 +175,9 @@
       border-radius: 4px;
       font-size: 14px;
       flex-shrink: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
+      background: var(--mauve-900);
+      font-weight: 500;
+      color: var(--white);
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -132,7 +193,7 @@
     border-radius: 8px;
     padding: 22px 26px;
 
-    background-color: #fff;
+    background-color: var(--white);
     align-items: center;
     flex-shrink: 0;
     gap: 16px;
@@ -169,28 +230,42 @@
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 220px;
+    font-weight: 500;
+    color: var(--mauve-600);
   }
   &__lvl {
     width: 100%;
-    color: #8a8a8e;
+    color: var(--black);
+    opacity: 0.6;
     font-size: 12px;
   }
 
-  &__btns{
+  &__btns {
     display: flex;
     gap: 10px;
   }
 
   &__btn {
-    background: rgba(116, 116, 128, 0.05);
+    background: var(--white);
     padding: 8px 14px;
+    border: var(--mauve-500) 1px solid;
+    color: var(--mauve-500);
     border-radius: 8px;
     font-size: 14px;
     transition: all 0.2s ease-in-out;
     justify-self: end;
 
+    path {
+      fill: var(--mauve-500);
+      transition: all 0.2s ease-in-out;
+    }
+
     &:hover {
-      background: rgba(116, 116, 128, 0.1);
+      border: var(--mauve-700) 1px solid;
+      color: var(--mauve-700);
+      path {
+        fill: var(--mauve-700);
+      }
     }
   }
 
@@ -211,9 +286,9 @@
   }
   .sidebar {
     position: sticky;
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 10px;
-    padding: 5px 0;
+    padding: 5px 3px;
     z-index: 20;
     top: calc(56px + 20px);
 
@@ -233,7 +308,8 @@
       font-size: 12px;
       line-height: 20px;
       user-select: none;
-      color: #8a8a8e;
+      color: var(--black);
+      opacity: 0.6;
     }
 
     &__menu {
@@ -243,7 +319,7 @@
         display: flex;
         align-items: center;
         padding: 8px 14px;
-        color: #212529;
+        color: var(--mauve-950);
         font-size: 14px;
         line-height: 1.2;
         border-radius: 8px;
@@ -251,9 +327,13 @@
         text-decoration: none;
         transition: color 0.2s ease, background 0.2s ease;
         cursor: pointer;
+        
+        &:hover{
+          background: var(--mauve-50);
+        }
 
         &--active {
-          background: rgba(116, 116, 128, 0.05);
+          background: var(--mauve-100);
         }
       }
     }
@@ -290,8 +370,11 @@
     &:hover {
       transform: translateY(-10px);
 
-      .popular__card-title {
-        color: #ff5d19;
+      .profile__card-title {
+        color: var(--mauve-600);
+      }
+      .profile__card-img::after {
+        opacity: 1;
       }
     }
 
@@ -315,6 +398,23 @@
         opacity: 1;
         transition: opacity 0.15s ease-in;
       }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to top,
+          #d249ec70,
+          #80008000
+        ); // Фиолетовый градиент снизу вверх
+        border-radius: inherit;
+        opacity: 0; // По умолчанию градиент скрыт
+        transition: opacity 0.2s ease-in-out; // Плавный переход для показа градиента
+        pointer-events: none; // Чтобы градиент не блокировал клики
+      }
     }
 
     &-text {
@@ -322,7 +422,7 @@
       padding-top: 6px;
       max-height: 60px;
       overflow: hidden;
-      color: #212529;
+      color: var(--black);
       text-decoration: none;
       font-size: 14px;
     }
@@ -343,7 +443,8 @@
 
     &-category {
       font-size: 13px;
-      color: #8a8a8e;
+      color: var(--black);
+      opacity: 0.6;
       display: flex;
       gap: 10px;
       text-transform: uppercase;
@@ -361,8 +462,9 @@
       border-radius: 4px;
       font-size: 14px;
       flex-shrink: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
+      background: var(--mauve-900);
+      font-weight: 500;
+      color: var(--white);
       white-space: nowrap;
       text-overflow: ellipsis;
     }
@@ -373,12 +475,12 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: var(--white);
+  border-radius: 16px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-  h2{
-    color: #ff5d19;
+  h2 {
+    color: var(--mauve-500);
     font-weight: 600;
     margin-bottom: 20px;
   }
@@ -404,16 +506,18 @@
       font-size: 24px;
       margin: 0;
       font-weight: 600;
+      color: var(--mauve-800);
     }
 
     p {
       margin: 5px 0;
-      color: #555;
+      color: var(--black);
+      opacity: 0.6;
     }
   }
 
-  &__status{
-    select{
+  &__status {
+    select {
       margin-left: 5px;
       padding: 10px;
       border-radius: 10px;
@@ -437,12 +541,13 @@
       gap: 4px 16px;
 
       li {
-        background-color: #f2e3e370;
+        background-color: var(--mauve-400);
         border-radius: 10px;
         text-align: center;
 
-        color: #ff5d19;
-        font-weight: 500;
+        color: var(--white);
+        font-weight: 600;
+        letter-spacing: -0.2px;
         padding: 10px;
         margin: 5px 0;
         border-radius: 4px;
@@ -477,7 +582,6 @@
   }
 }
 
-
 .anime-roulette {
   display: flex;
   flex-direction: column;
@@ -489,7 +593,7 @@
   margin: 0 auto;
   border-radius: 10px;
 
-  h2{
+  h2 {
     margin-bottom: 10px;
   }
 }

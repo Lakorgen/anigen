@@ -1,25 +1,25 @@
+@import "./vars";
+
 .header {
   position: sticky;
   top: 0;
   z-index: 70;
-  color: #212529;
+  color: var(--mauve-950);
   width: 100vw;
   min-height: 56px;
   height: 56px;
-  background: #FFAE8C;
+  background: var(--mauve-50);
   box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px;
 
-  @media (max-width: 450px){
+  @media (max-width: 450px) {
     display: none;
   }
 
   &__inner {
     display: grid;
     align-items: center;
-    grid-template-columns: 150px 1fr 50px;
+    grid-template-columns: 150px 1fr 30px;
     height: 100%;
-
-    
   }
 
   &__logo {
@@ -40,25 +40,54 @@
   }
 
   &__link {
-    padding: 8px 10px;
+    padding: 5px;
     border-radius: 8px;
     transition: all 0.2s ease-in-out;
+    position: relative;
+    display: block;
 
-    &:hover {
-      background: #ec7948;
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -3px; // Расстояние линии от текста
+      left: 0;
+      width: 0; // Начальная ширина
+      height: 2px;
+      background-color: var(--mauve-950); // Цвет линии
+      transition: width 0.3s ease-in-out;
+    }
+
+    &:hover:before {
+      width: 100%; // Ширина линии при наведении
     }
   }
 
   &__profile {
+    padding: 5px;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    border-radius: 8px;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      background: #ec7948;
+
+    path{
+      fill: var(--mauve-950)
     }
 
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: -3px; // Расстояние линии от текста
+      left: 0;
+      width: 0; // Начальная ширина
+      height: 2px;
+      background-color: var(--mauve-950); // Цвет линии
+      transition: width 0.3s ease-in-out;
+    }
+
+    &:hover:before {
+      width: 100%; // Ширина линии при наведении
+    }
   }
 }
