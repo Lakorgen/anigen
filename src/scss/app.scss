@@ -62,6 +62,12 @@ body {
   margin-bottom: 80px;
 }
 
+.home{
+  &__info{
+    color: var(--text-color);
+  }
+}
+
 .popular {
   &__cards {
     display: flex;
@@ -353,6 +359,7 @@ body {
       text-align: center;
       font-size: 32px;
       font-weight: 700;
+      color: var(--text-color);
     }
   }
   &__cards {

@@ -1,6 +1,7 @@
 import React from "react";
 import PopularCard from "../components/PopularCard";
 import SkeletonPopular from "../components/PopularCard/SkeletonPopular";
+import TrailerBanner from '../components/TrailerBanner'
 import "../scss/app.scss";
 
 const Home = () => {
@@ -18,8 +19,15 @@ const Home = () => {
       });
   }, []);
 
+  const bannerData = {
+    title: "Атака титанов",
+    description: "Эпическая битва людей против титанов.",
+  };
+
+
   return (
     <>
+          <TrailerBanner {...bannerData} />
       <div className="popular__cards">
         {isLoading ? (
           // Отображаем скелетоны, пока данные загружаются
@@ -29,7 +37,7 @@ const Home = () => {
           items.map((item) => <PopularCard key={item.id} {...item} />)
         )}
       </div>
-      <p>
+      <p className="home__info">
         тут что-то когда-то будет, а пока перейдите в <b>каталог</b> или{" "}
         <b>профиль</b>
       </p>
