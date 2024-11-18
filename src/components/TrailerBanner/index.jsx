@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 const TrailerBanner = ({ title, description }) => {
-  const videoRef = React.useRef(null);
+  // const videoRef = React.useRef(null);
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
 
-  React.useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 20;
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (videoRef.current) {
+  //     videoRef.current.currentTime = 20;
+  //   }
+  // }, []);
 
   const handleVideoLoaded = () => {
     setIsVideoLoaded(true);
@@ -20,13 +20,13 @@ const TrailerBanner = ({ title, description }) => {
     <div className={styles.banner}>
       {!isVideoLoaded && (
         <img
-          src="/img/attack.jpg"
+          src="/img/attack.webp"
           alt="Placeholder"
           className={styles.placeholder}
         />
       )}
       <video
-        ref={videoRef}
+        // ref={videoRef}
         src="/media/titan.webm"
         autoPlay
         muted

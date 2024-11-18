@@ -65,7 +65,7 @@ const Profile = () => {
           <div className="profile__left">
             <div className="profile__img">
               <img
-                src="img/scale_2400.jpg"
+                src="img/profile.webp"
                 alt="Аватар пользователя"
                 loading="lazy"
               />
