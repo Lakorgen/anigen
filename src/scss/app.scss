@@ -549,6 +549,12 @@ body {
     margin-top: 20px;
   }
 
+  &__description{
+    a{
+      color: var(--mauve-500);
+    }
+  }
+
   &__genres {
     ul {
       list-style-type: none;

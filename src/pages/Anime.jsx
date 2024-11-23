@@ -109,7 +109,9 @@ const Anime = () => {
       </div>
       <div className="anime__description">
         <h2>Описание</h2>
-        <p>{item.description}</p>
+        <div
+    dangerouslySetInnerHTML={{ __html: item.description_html }}
+  />
       </div>
       <div className="anime__genres">
         <h2>Жанры</h2>
