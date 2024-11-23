@@ -1,42 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import KinoboxPlayer from "../components/KinoboxPlayer";
-import { doc, getDoc, setDoc } from "firebase/firestore"; // Firestore methods
-import { db } from "../firebase"; // импорт Firestore из firebase.js
-import { useSelector } from "react-redux"; // для получения текущего пользователя
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useSelector } from "react-redux";
+import PopularCard from "../components/PopularCard";
 
 const Anime = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
+  const [similar, setSimilar] = React.useState([]);
   const [status, setStatus] = useState("");
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    const fetchAnimeData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`https://shikimori.one/api/animes/${id}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const json = await response.json();
-        setItem(json);
-        
-        // Проверяем, есть ли аниме в Firestore
+        const [animeRes, similarRes] = await Promise.all([
+          fetch(`https://shikimori.one/api/animes/${id}`),
+          fetch(`https://shikimori.one/api/animes/${id}/similar?limit=10`),
+        ]);
+        const animeData = await animeRes.json();
+        const similarData = await similarRes.json();
+
+        setItem(animeData);
+        setSimilar(similarData);
+
+        // Firestore проверка
         if (user.id) {
-          const animeRef = doc(db, "users", user.id, "anime", id); // путь к документу аниме для пользователя
+          const animeRef = doc(db, "users", user.id, "anime", id);
           const animeDoc = await getDoc(animeRef);
           if (animeDoc.exists()) {
-            const animeData = animeDoc.data();
-            setStatus(animeData.status); // Устанавливаем статус из Firestore
+            setStatus(animeDoc.data().status);
           }
         }
       } catch (error) {
-        console.error("Ошибка при получении данных:", error);
+        console.error("Ошибка при загрузке данных:", error);
       }
     };
 
-    fetchAnimeData();
-  }, [id, user.id]); // Добавляем user.id в зависимости
+    fetchData();
+  }, [id, user.id]);
 
   const handleStatusChange = async (newStatus) => {
     if (!user.id) {
@@ -44,14 +48,12 @@ const Anime = () => {
       return;
     }
 
-    const animeRef = doc(db, "users", user.id, "anime", id); // путь к документу аниме для пользователя
+    const animeRef = doc(db, "users", user.id, "anime", id);
     try {
       const animeDoc = await getDoc(animeRef);
       if (animeDoc.exists()) {
-        // Если аниме уже есть в Firestore, обновляем статус
         await setDoc(animeRef, { status: newStatus }, { merge: true });
       } else {
-        // Если аниме еще нет, добавляем новый документ с данными
         await setDoc(animeRef, {
           id,
           status: newStatus,
@@ -61,7 +63,7 @@ const Anime = () => {
           score: item.score,
         });
       }
-      setStatus(newStatus); // Обновляем локальное состояние статуса
+      setStatus(newStatus);
       console.log("Статус аниме обновлен");
     } catch (error) {
       console.error("Ошибка при обновлении статуса аниме:", error);
@@ -124,23 +126,6 @@ const Anime = () => {
         <h2>Смотреть онлайн</h2>
         <KinoboxPlayer title={item.name} />
       </div>
-      <div className="anime__videos">
-        <h2>Тизеры</h2>
-        {item.videos.map((video) => (
-          <div key={video.id} className="anime__video">
-            <h3>{video.name}</h3>
-            <iframe
-              width="560"
-              height="315"
-              src={video.player_url}
-              title={video.name}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        ))}
-      </div>
       <div className="anime__screenshots">
         <h2>Скриншоты</h2>
         <div className="anime__screenshots-grid">
@@ -151,6 +136,14 @@ const Anime = () => {
               alt={`Screenshot ${index + 1}`}
               className="anime__screenshot"
             />
+          ))}
+        </div>
+      </div>
+      <div className="anime__similar">
+        <h2>Похожие</h2>
+        <div className="anime__similar-cards">
+          {similar.map((item) => (
+            <PopularCard key={item.id} {...item} />
           ))}
         </div>
       </div>
