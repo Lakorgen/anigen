@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const MobileMenu = () => {
   return (
     <div className="mobile__menu">
       <ul>
         <li>
-          <Link to="/catalog">
+          <NavLink to="/catalog">
             <svg
               className="svg-inline--fa fa-layer-group"
               aria-hidden="true"
@@ -24,10 +24,10 @@ const MobileMenu = () => {
               ></path>
             </svg>
             Каталог
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/">
+          <NavLink to="/">
             <svg
               width="800px"
               height="800px"
@@ -41,10 +41,10 @@ const MobileMenu = () => {
               />
             </svg>
             Главная
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to="/profile">
+          <NavLink to="/profile">
             <svg
               fill="#000000"
               xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ const MobileMenu = () => {
               </g>
             </svg>
             Профиль
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </div>
