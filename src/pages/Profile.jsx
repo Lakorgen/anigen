@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ProfileCard from "../components/ProfileCard";
-import SkeletonProfile from "../components/ProfileCard/SkeletonProfile";
+import Card from "../components/Card";
+import SkeletonProfile from "../components/Skeleton";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
@@ -52,10 +52,10 @@ const Profile = () => {
   });
 
   const toggleTheme = () => {
-    const currentTheme = document.body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.body.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    const currentTheme = document.body.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.body.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
   };
 
   return (
@@ -132,11 +132,11 @@ const Profile = () => {
               <div className="profile__cards">
                 {loading &&
                   [...Array(6)].map((_, index) => (
-                    <SkeletonProfile key={index} />
+                    <SkeletonProfile key={index} backgroundColor="#fff" />
                   ))}
                 {error && <div>Ошибка: {error}</div>}
                 {filteredItems.map((item) => (
-                  <ProfileCard key={item.id} {...item} />
+                  <Card key={item.id} {...item} />
                 ))}
               </div>
             ) : (

@@ -1,14 +1,14 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const SkeletonProfile = (props) => (
+const Skeleton = (props, backgroundColor) => (
   <div className="profile__card">
     <ContentLoader
       speed={2}
       width={135}
       height={244}
       viewBox="0 0 135 244"
-      backgroundColor="#fff"
+      backgroundColor={backgroundColor}
       foregroundColor="#ecebeb"
       {...props}
     >
@@ -19,4 +19,4 @@ const SkeletonProfile = (props) => (
   </div>
 );
 
-export default SkeletonProfile;
+export default Skeleton;

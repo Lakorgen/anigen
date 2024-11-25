@@ -4,7 +4,7 @@ import KinoboxPlayer from "../components/KinoboxPlayer";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
-import PopularCard from "../components/PopularCard";
+import Card from "../components/Card";
 
 const Anime = () => {
   const { id } = useParams();
@@ -145,7 +145,7 @@ const Anime = () => {
         <h2>Похожие</h2>
         <div className="anime__similar-cards">
           {similar.map((item) => (
-            <PopularCard key={item.id} {...item} />
+            <Card key={item.id} {...item} />
           ))}
         </div>
       </div>

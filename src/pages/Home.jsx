@@ -1,8 +1,8 @@
 import React from "react";
-import PopularCard from "../components/PopularCard";
-import SkeletonPopular from "../components/PopularCard/SkeletonPopular";
-import TrailerBanner from '../components/TrailerBanner'
+import Card from "../components/Card";
+import TrailerBanner from "../components/TrailerBanner";
 import "../scss/app.scss";
+import SkeletonProfile from "../components/Skeleton";
 
 const Home = () => {
   const [items, setItems] = React.useState([]);
@@ -24,18 +24,17 @@ const Home = () => {
     description: "Эпическая битва людей против титанов.",
   };
 
-
   return (
     <>
-          <TrailerBanner {...bannerData} />
+      <TrailerBanner {...bannerData} />
       <div className="popular__cards">
-        {isLoading ? (
-          // Отображаем скелетоны, пока данные загружаются
-          [...Array(10)].map((_, index) => <SkeletonPopular key={index} />)
-        ) : (
-          // Отображаем данные, когда они загружены
-          items.map((item) => <PopularCard key={item.id} {...item} />)
-        )}
+        {isLoading
+          ? // Отображаем скелетоны, пока данные загружаются
+            [...Array(10)].map((_, index) => (
+              <SkeletonProfile key={index} backgroundColor="#f3f3f3" />
+            ))
+          : // Отображаем данные, когда они загружены
+            items.map((item) => <Card key={item.id} {...item} />)}
       </div>
       <p className="home__info">
         тут что-то когда-то будет, а пока перейдите в <b>каталог</b> или{" "}

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ProfileCard from "../components/ProfileCard";
-import SkeletonProfile from "../components/ProfileCard/SkeletonProfile";
+import SkeletonProfile from "../components/Skeleton";
 import SidebarCatalog from "../components/SidebarCatalog";
-import CatalogCard from "../components/CatalogCard";
+import Card from "../components/Card";
 
 const Catalog = () => {
   const [items, setItems] = useState([]);
@@ -14,10 +13,10 @@ const Catalog = () => {
 
   // Маппинг категорий на статус
   const categoriesStatusMap = {
-    0: "",          // Все
-    1: "ongoing",   // Онгоинг
-    2: "released",  // Завершён
-    3: "anons",     // Анонс
+    0: "", // Все
+    1: "ongoing", // Онгоинг
+    2: "released", // Завершён
+    3: "anons", // Анонс
   };
 
   const fetchItems = (page, status) => {
@@ -81,23 +80,24 @@ const Catalog = () => {
     <div>
       <div className="profile">
         <div className="profile__wrapper">
-          <SidebarCatalog 
-            categoryActive={activeCategory} 
-            setCategoryActive={handleCategoryChange} 
+          <SidebarCatalog
+            categoryActive={activeCategory}
+            setCategoryActive={handleCategoryChange}
           />
           <div className="profile__content">
             <div className="profile__cards">
               {/* Отображаем скелетоны во время загрузки */}
-              {loading && 
-                [...Array(6)].map((_, index) => <SkeletonProfile key={index} />)
-              }
+              {loading &&
+                [...Array(6)].map((_, index) => (
+                  <SkeletonProfile key={index} backgroundColor="#fff" />
+                ))}
               {/* Отображаем карточки профиля, когда данные загружены */}
               {!loading &&
-                items.map((item) => <CatalogCard key={item.id} {...item} />)
-              }
+                items.map((item) => <Card key={item.id} {...item} />)}
               {error && <div>Ошибка: {error}</div>} {/* Сообщение об ошибке */}
             </div>
-            {isFetching && <div>Загружаем ещё...</div>} {/* Индикатор загрузки следующей страницы */}
+            {isFetching && <div>Загружаем ещё...</div>}{" "}
+            {/* Индикатор загрузки следующей страницы */}
           </div>
         </div>
       </div>
