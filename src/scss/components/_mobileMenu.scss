@@ -32,6 +32,8 @@
         align-items: center;
         justify-content: center;
         transition: all .2s ease-in-out;
+        outline: none; 
+        -webkit-tap-highlight-color: transparent;
         
         &.active{
           transform: translateY(-3px);
