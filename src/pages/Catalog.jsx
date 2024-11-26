@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SkeletonProfile from "../components/Skeleton";
 import SidebarCatalog from "../components/SidebarCatalog";
 import Card from "../components/Card";
+import transition from "../transition";
 
 const Catalog = () => {
   const [items, setItems] = useState([]);
@@ -105,4 +106,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default transition(Catalog);

@@ -3,6 +3,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import transition from "../transition";
+
 
 const AnimeRoulette = () => {
   const [animeList, setAnimeList] = useState([]); // Список аниме
@@ -89,4 +91,4 @@ const AnimeRoulette = () => {
   );
 };
 
-export default AnimeRoulette;
+export default transition(AnimeRoulette);

@@ -1,6 +1,7 @@
 @import "./components/all.scss";
 
-a, button{
+a,
+button {
   outline: none; // Убирает рамку вокруг элемента
   -webkit-tap-highlight-color: transparent;
 }
@@ -460,4 +461,29 @@ body {
 
 .kinobox_iframe_wrapper {
   // z-index: 1 !important;
+}
+
+.slide-in,
+.slide-out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: left;
+
+  &-text {
+    font-size: 6vw;
+    color: var(--text-color);
+    font-weight: 700;
+  }
+}
+
+.slide-out {
+  transform-origin: right;
 }

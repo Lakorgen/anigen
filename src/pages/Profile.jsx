@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../store/slices/userSlice";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
+import transition from "../transition";
+
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -149,4 +151,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default transition(Profile);

@@ -5,6 +5,8 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import Card from "../components/Card";
+import transition from "../transition";
+
 
 const Anime = () => {
   const { id } = useParams();
@@ -153,4 +155,4 @@ const Anime = () => {
   );
 };
 
-export default Anime;
+export default transition(Anime);

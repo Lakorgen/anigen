@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import TrailerBanner from "../components/TrailerBanner";
 import "../scss/app.scss";
 import SkeletonProfile from "../components/Skeleton";
+import transition from "../transition";
 
 const Home = () => {
   const [items, setItems] = React.useState([]);
@@ -44,4 +45,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default transition(Home);
