@@ -6,7 +6,7 @@ import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import Card from "../components/Card";
 import transition from "../transition";
-
+import { animeAPI } from "../api/api";
 
 const Anime = () => {
   const { id } = useParams();
@@ -19,11 +19,12 @@ const Anime = () => {
     const fetchData = async () => {
       try {
         const [animeRes, similarRes] = await Promise.all([
-          fetch(`https://shikimori.one/api/animes/${id}`),
-          fetch(`https://shikimori.one/api/animes/${id}/similar?limit=10`),
+          animeAPI.getAnimeById(id),
+          animeAPI.getSimilarAnime(id),
         ]);
-        const animeData = await animeRes.json();
-        const similarData = await similarRes.json();
+
+        const animeData = await animeRes.data;
+        const similarData = await similarRes.data;
 
         setItem(animeData);
         setSimilar(similarData);
@@ -111,9 +112,7 @@ const Anime = () => {
       </div>
       <div className="anime__description">
         <h2>Описание</h2>
-        <div
-    dangerouslySetInnerHTML={{ __html: item.description_html }}
-  />
+        <div dangerouslySetInnerHTML={{ __html: item.description_html }} />
       </div>
       <div className="anime__genres">
         <h2>Жанры</h2>

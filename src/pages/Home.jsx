@@ -2,22 +2,19 @@ import React from "react";
 import Card from "../components/Card";
 import TrailerBanner from "../components/TrailerBanner";
 import "../scss/app.scss";
-import SkeletonProfile from "../components/Skeleton";
+import Skeleton from "../components/Skeleton";
 import transition from "../transition";
+import { animeAPI } from "../api/api";
 
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    fetch(
-      "https://shikimori.one/api/animes?order=ranked&status=ongoing&season=2024&limit=10"
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        setItems(json);
-        setIsLoading(false); // Данные загружены, выключаем состояние загрузки
-      });
+    animeAPI.getPopularAnime().then((data) => {
+      setItems(data.data);
+      setIsLoading(false);
+    });
   }, []);
 
   const bannerData = {
@@ -32,7 +29,7 @@ const Home = () => {
         {isLoading
           ? // Отображаем скелетоны, пока данные загружаются
             [...Array(10)].map((_, index) => (
-              <SkeletonProfile key={index} backgroundColor="#f3f3f3" />
+              <Skeleton key={index} backgroundColor="#f3f3f3" />
             ))
           : // Отображаем данные, когда они загружены
             items.map((item) => <Card key={item.id} {...item} />)}

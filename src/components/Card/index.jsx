@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./Card.module.scss"; // Импорт стилей
 
 const Card = ({ id, russian, image, kind, score }) => {
-  console.log(image);
-  
   return (
     <Link to={`/anime/${id}`} className={styles.card}>
       <div className={styles["card-img"]}>

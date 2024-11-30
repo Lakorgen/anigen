@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "../components/Card";
-import SkeletonProfile from "../components/Skeleton";
+import Skeleton from "../components/Skeleton";
 import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
@@ -85,12 +85,12 @@ const Profile = () => {
                 height="20px"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                class="w-5 h-5 text-color-muted"
+                className="w-5 h-5 text-color-muted"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
             </button>
@@ -104,7 +104,7 @@ const Profile = () => {
                 viewBox="0 0 32 32"
               >
                 <path
-                  class="blueprint_een"
+                  className="blueprint_een"
                   d="M19,19h-2v-2h2V19z M27,17h-2v2h2V17z M27,25h-2v2h2V25z M19,25h-2v2h2V25z M23,21h-2v2h2V21z M15,5
   	h-2v2h2V5z M5,15h2v-2H5V15z M9,11h2V9H9V11z M31,14v16c0,0.552-0.448,1-1,1H14c-0.552,0-1-0.448-1-1V19H2c-0.552,0-1-0.448-1-1V2
   	c0-0.552,0.448-1,1-1h16c0.552,0,1,0.448,1,1v11h11C30.552,13,31,13.448,31,14z M3,17h11v-3h3V3H3V17z M29,15H15v14h14V15z"
@@ -134,7 +134,7 @@ const Profile = () => {
               <div className="profile__cards">
                 {loading &&
                   [...Array(6)].map((_, index) => (
-                    <SkeletonProfile key={index} backgroundColor="#fff" />
+                    <Skeleton key={index} backgroundColor="#fff" />
                   ))}
                 {error && <div>Ошибка: {error}</div>}
                 {filteredItems.map((item) => (

@@ -183,12 +183,13 @@ body {
   &__wrapper {
     display: grid;
     gap: 20px;
-    grid-template-areas:
-      "sidebar search"
-      "sidebar content";
-    grid-template-rows: auto 1fr;
+    // grid-template-areas:
+    //   "sidebar search"
+    //   "sidebar content";
+    // grid-template-rows: auto 1fr;
     grid-template-columns: 150px 1fr;
     align-items: flex-start;
+    position: relative;
 
     @media (max-width: 600px) {
       display: flex;
@@ -197,11 +198,12 @@ body {
   }
   .sidebar {
     position: sticky;
+    top: 0;
     background-color: var(--bg-card-color);
     border-radius: 10px;
     padding: 5px 3px;
     z-index: 20;
-    top: calc(56px + 20px);
+    // top: calc(56px + 20px);
 
     @media (max-width: 600px) {
       position: relative;

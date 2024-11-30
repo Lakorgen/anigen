@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import SkeletonProfile from "../components/Skeleton";
+import Skeleton from "../components/Skeleton";
 import SidebarCatalog from "../components/SidebarCatalog";
 import Card from "../components/Card";
 import transition from "../transition";
+import { animeAPI } from "../api/api";
 
 const Catalog = () => {
   const [items, setItems] = useState([]);
@@ -22,17 +23,10 @@ const Catalog = () => {
 
   const fetchItems = (page, status) => {
     setIsFetching(true); // Начинаем новый запрос
-    fetch(
-      `https://shikimori.one/api/animes?order=ranked&status=${status}&limit=30&page=${page}`
-    )
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Ошибка загрузки данных");
-        }
-        return res.json();
-      })
-      .then((json) => {
-        setItems((prevItems) => [...prevItems, ...json]); // Добавляем новые данные к существующим
+    animeAPI
+      .getAllAnimes(status, page)
+      .then((data) => {
+        setItems((prevItems) => [...prevItems, ...data.data]); // Добавляем новые данные к существующим
         setLoading(false); // Отключаем индикатор загрузки
         setIsFetching(false); // Завершаем запрос
       })
@@ -90,7 +84,7 @@ const Catalog = () => {
               {/* Отображаем скелетоны во время загрузки */}
               {loading &&
                 [...Array(6)].map((_, index) => (
-                  <SkeletonProfile key={index} backgroundColor="#fff" />
+                  <Skeleton key={index} backgroundColor="#fff" />
                 ))}
               {/* Отображаем карточки профиля, когда данные загружены */}
               {!loading &&
