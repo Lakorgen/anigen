@@ -4,35 +4,28 @@ import TrailerBanner from "../components/TrailerBanner";
 import "../scss/app.scss";
 import Skeleton from "../components/Skeleton";
 import transition from "../transition";
-import { animeAPI } from "../api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPopularAnime } from "../store/actions/animeActions";
 
 const Home = () => {
-  const [items, setItems] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const dispatch = useDispatch();
+  const { items, isLoading } = useSelector((state) => state.popularAnime);
 
   React.useEffect(() => {
-    animeAPI.getPopularAnime().then((data) => {
-      setItems(data.data);
-      setIsLoading(false);
-    });
-  }, []);
-
-  const bannerData = {
-    title: "Атака титанов",
-    description: "Эпическая битва людей против титанов.",
-  };
+    if (items.length === 0) {
+      dispatch(fetchPopularAnime());
+    }
+  }, [dispatch, items]);
 
   return (
     <>
-      <TrailerBanner {...bannerData} />
+      <TrailerBanner />
       <div className="popular__cards">
         {isLoading
-          ? // Отображаем скелетоны, пока данные загружаются
-            [...Array(10)].map((_, index) => (
+          ? [...Array(10)].map((_, index) => (
               <Skeleton key={index} backgroundColor="#f3f3f3" />
             ))
-          : // Отображаем данные, когда они загружены
-            items.map((item) => <Card key={item.id} {...item} />)}
+          : items.map((item) => <Card key={item.id} {...item} />)}
       </div>
       <p className="home__info">
         тут что-то когда-то будет, а пока перейдите в <b>каталог</b> или{" "}
