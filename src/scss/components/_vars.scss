@@ -5,7 +5,8 @@
   --bg-color: #f2f2f3;
   --bg-card-color: #fff;
 
-  --bg-header-color: var(--mauve-50);
+  // --bg-header-color: var(--mauve-50);
+  --bg-header-color: rgba(242, 242, 243, .5);
   --bg-sidebar-hover: var(--mauve-50);
   --bg-sidebar-active: var(--mauve-100);
 
@@ -25,7 +26,7 @@
     --bg-color: #0e0e11;
     --text-color: #f4f4f5;
     --bg-card-color: #18181b;
-    --bg-header-color: #18181b;
+    --bg-header-color: rgba(24, 24, 27, .8);
     --bg-sidebar-hover: #a1a1aa;
     --bg-sidebar-active: #52525b;
     --mauve-950: #fff;
