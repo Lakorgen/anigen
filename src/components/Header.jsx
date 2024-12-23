@@ -14,11 +14,7 @@ const Header = () => {
               Каталог
             </Link>
           </li>
-          <li className="header__item">
-            <Link className="header__link" to="#">
-              Поиск
-            </Link>
-          </li>
+         
         </ul>
         <Link to="/profile" className="header__profile">
           <svg

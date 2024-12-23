@@ -9,7 +9,7 @@ import { removeUser } from "../store/slices/userSlice";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import transition from "../transition";
-
+import Search from "../components/Search";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ const Profile = () => {
 
       setItems(animeList);
       setLoading(false);
-      console.log(animeList);
     } catch (error) {
       console.error("Ошибка при загрузке данных из Firestore:", error);
       setError(error.message);
@@ -131,16 +130,19 @@ const Profile = () => {
           {/* Передача функции для выбора категории */}
           <div className="profile__content">
             {isAuth ? (
-              <div className="profile__cards">
-                {loading &&
-                  [...Array(6)].map((_, index) => (
-                    <Skeleton key={index} backgroundColor="#fff" />
+              <>
+                {/* <Search /> */}
+                <div className="profile__cards">
+                  {loading &&
+                    [...Array(6)].map((_, index) => (
+                      <Skeleton key={index} backgroundColor="#fff" />
+                    ))}
+                  {error && <div>Ошибка: {error}</div>}
+                  {filteredItems.map((item) => (
+                    <Card key={item.id} {...item} />
                   ))}
-                {error && <div>Ошибка: {error}</div>}
-                {filteredItems.map((item) => (
-                  <Card key={item.id} {...item} />
-                ))}
-              </div>
+                </div>
+              </>
             ) : (
               <div className="profile__content-info">Нужно войти в аккаунт</div>
             )}

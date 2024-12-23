@@ -24,6 +24,10 @@ const catalogAnimeSlice = createSlice({
     incrementPage(state) {
       state.page += 1;
     },
+    setSearchResults(state, action) {
+      state.items = action.payload;
+      state.page = 1;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCatalogAnime.pending, (state) => {
@@ -41,6 +45,6 @@ const catalogAnimeSlice = createSlice({
     });
   },
 });
-export const { setActiveCategory, incrementPage, clearAnime } =
+export const { setActiveCategory, incrementPage, clearAnime, setSearchResults } =
   catalogAnimeSlice.actions;
 export default catalogAnimeSlice.reducer;

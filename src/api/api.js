@@ -24,4 +24,9 @@ export const animeAPI = {
       `https://shikimori.one/api/animes/${id}/similar?limit=10`
     );
   },
+  getSearchAnime(search) {
+    return instance.get(
+      `https://shikimori.one/api/animes/?search=${search}&limit=50&order=ranked`
+    );
+  },
 };

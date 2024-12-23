@@ -67,7 +67,6 @@ const Anime = () => {
         });
       }
       setStatus(newStatus);
-      console.log("Статус аниме обновлен");
     } catch (error) {
       console.error("Ошибка при обновлении статуса аниме:", error);
     }
@@ -127,7 +126,14 @@ const Anime = () => {
       <br />
       <div className="aniime_player">
         <h2>Смотреть онлайн</h2>
-        <KinoboxPlayer title={item.name} />
+        {!item.genres.some((genre) => genre.name === "Hentai") ? (
+          <KinoboxPlayer title={item.name} />
+        ) : (
+          <h2 className="not-available">
+            Просмотр не доступен! <br />
+            Аниме содержит недопустимый контент.
+          </h2>
+        )}
       </div>
       <div className="anime__screenshots">
         <h2>Скриншоты</h2>
