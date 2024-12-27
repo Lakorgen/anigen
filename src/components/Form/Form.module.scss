@@ -1,14 +1,17 @@
-@import '../../scss/components/all';
+@import "../../scss/components/all";
 
+.form {
+  width: 100%;
+}
 .inputContainer {
   position: relative;
   width: 100%;
-  margin: 10px 0;
+  margin: 15px 0 10px;
 
   .label {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 15px;
     transform: translateY(-50%);
     color: #ccc;
     transition: 0.2s ease all;
@@ -44,8 +47,14 @@
   border: none;
   cursor: pointer;
   font-weight: bold;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover {
     background-color: var(--mauve-600);
   }
+}
+
+.error {
+  color: tomato;
+  margin-bottom: 10px;
+  font-size: 12px;
 }
