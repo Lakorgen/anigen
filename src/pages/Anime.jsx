@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 import KinoboxPlayer from "../components/KinoboxPlayer";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -77,86 +78,92 @@ const Anime = () => {
   }
 
   return (
-    <div className="anime">
-      <div className="anime__header">
-        <img
-          src={`https://shikimori.one${item.image.original}`}
-          alt={item.name}
-          className="anime__image"
-        />
-        <div className="anime__title">
-          <h1>
-            {item.name} ({item.russian})
-          </h1>
-          <p>Рейтинг: {item.score}</p>
-          <p>Статус: {item.status}</p>
-          <p>
-            Эпизоды: {item.episodes} ({item.episodes_aired} вышло)
-          </p>
+    <>
+      <Helmet>
+        <meta name="description" content="Login page in anigen" />
+        <title>{item.russian} – Anigen</title>
+      </Helmet>
+      <div className="anime">
+        <div className="anime__header">
+          <img
+            src={`https://shikimori.one${item.image.original}`}
+            alt={item.name}
+            className="anime__image"
+          />
+          <div className="anime__title">
+            <h1>
+              {item.name} ({item.russian})
+            </h1>
+            <p>Рейтинг: {item.score}</p>
+            <p>Статус: {item.status}</p>
+            <p>
+              Эпизоды: {item.episodes} ({item.episodes_aired} вышло)
+            </p>
+          </div>
+        </div>
+        <div className="anime__status">
+          <label htmlFor="statusSelect">Добавить в список:</label>
+          <select
+            id="statusSelect"
+            value={status}
+            onChange={(e) => handleStatusChange(e.target.value)}
+          >
+            <option value="">Выберите статус</option>
+            <option value="Просмотренно">Просмотренно</option>
+            <option value="В планах">В планах</option>
+            <option value="Смотрю">Смотрю</option>
+            <option value="Брошено">Брошено</option>
+          </select>
+        </div>
+        <div className="anime__description">
+          <h2>Описание</h2>
+          <div dangerouslySetInnerHTML={{ __html: item.description_html }} />
+        </div>
+        <div className="anime__genres">
+          <h2>Жанры</h2>
+          <ul>
+            {item.genres.map((genre) => (
+              <li key={genre.id}>
+                {genre.russian} ({genre.name})
+              </li>
+            ))}
+          </ul>
+        </div>
+        <br />
+        <div className="aniime_player">
+          <h2>Смотреть онлайн</h2>
+          {!item.genres.some((genre) => genre.name === "Hentai") ? (
+            <KinoboxPlayer title={item.name} />
+          ) : (
+            <h2 className="not-available">
+              Просмотр не доступен! <br />
+              Аниме содержит недопустимый контент.
+            </h2>
+          )}
+        </div>
+        <div className="anime__screenshots">
+          <h2>Скриншоты</h2>
+          <div className="anime__screenshots-grid">
+            {item.screenshots.map((screenshot, index) => (
+              <img
+                key={index}
+                src={`https://shikimori.one${screenshot.preview}`}
+                alt={`Screenshot ${index + 1}`}
+                className="anime__screenshot"
+              />
+            ))}
+          </div>
+        </div>
+        <div className="anime__similar">
+          <h2>Похожие</h2>
+          <div className="anime__similar-cards">
+            {similar.map((item) => (
+              <Card key={item.id} {...item} />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="anime__status">
-        <label htmlFor="statusSelect">Добавить в список:</label>
-        <select
-          id="statusSelect"
-          value={status}
-          onChange={(e) => handleStatusChange(e.target.value)}
-        >
-          <option value="">Выберите статус</option>
-          <option value="Просмотренно">Просмотренно</option>
-          <option value="В планах">В планах</option>
-          <option value="Смотрю">Смотрю</option>
-          <option value="Брошено">Брошено</option>
-        </select>
-      </div>
-      <div className="anime__description">
-        <h2>Описание</h2>
-        <div dangerouslySetInnerHTML={{ __html: item.description_html }} />
-      </div>
-      <div className="anime__genres">
-        <h2>Жанры</h2>
-        <ul>
-          {item.genres.map((genre) => (
-            <li key={genre.id}>
-              {genre.russian} ({genre.name})
-            </li>
-          ))}
-        </ul>
-      </div>
-      <br />
-      <div className="aniime_player">
-        <h2>Смотреть онлайн</h2>
-        {!item.genres.some((genre) => genre.name === "Hentai") ? (
-          <KinoboxPlayer title={item.name} />
-        ) : (
-          <h2 className="not-available">
-            Просмотр не доступен! <br />
-            Аниме содержит недопустимый контент.
-          </h2>
-        )}
-      </div>
-      <div className="anime__screenshots">
-        <h2>Скриншоты</h2>
-        <div className="anime__screenshots-grid">
-          {item.screenshots.map((screenshot, index) => (
-            <img
-              key={index}
-              src={`https://shikimori.one${screenshot.preview}`}
-              alt={`Screenshot ${index + 1}`}
-              className="anime__screenshot"
-            />
-          ))}
-        </div>
-      </div>
-      <div className="anime__similar">
-        <h2>Похожие</h2>
-        <div className="anime__similar-cards">
-          {similar.map((item) => (
-            <Card key={item.id} {...item} />
-          ))}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

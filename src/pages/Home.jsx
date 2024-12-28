@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Card from "../components/Card";
 import TrailerBanner from "../components/TrailerBanner";
 import "../scss/app.scss";
@@ -19,6 +20,10 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <meta name="description" content="Home page in anigen" />
+        <title>Home – Anigen</title>
+      </Helmet>
       <TrailerBanner />
       <div className="popular__cards">
         {isLoading

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import transition from "../transition";
-
 
 const AnimeRoulette = () => {
   const [animeList, setAnimeList] = useState([]); // Список аниме
@@ -28,7 +28,7 @@ const AnimeRoulette = () => {
           id: doc.id,
           ...doc.data(),
         }));
-        
+
         setAnimeList(animeData);
         if (animeData.length > 0) {
           setActiveItem(animeData[0]); // Установить первое аниме по умолчанию
@@ -39,7 +39,7 @@ const AnimeRoulette = () => {
         console.error("Error fetching anime data: ", error); // Логируем ошибку, если есть
       }
     };
-    
+
     fetchAnime();
   }, [userId]);
 
@@ -72,22 +72,28 @@ const AnimeRoulette = () => {
   }, []);
 
   return (
-    <div className="anime-roulette">
-      <h2>Рулетка Аниме</h2>
-      {activeItem && (
-        <Link to={`/anime/${activeItem.id}`}>
-          <div className="selected-item">
-            <img
-              src={`https://shikimori.one${activeItem.image}`}
-              alt={activeItem.russian}
-            />
-          </div>
-        </Link>
-      )}
-      <button className="spin-button" onClick={startSpin}>
-        Крутить
-      </button>
-    </div>
+    <>
+      <Helmet>
+        <meta name="description" content="Catalog page in anigen" />
+        <title>Random anime – Anigen</title>
+      </Helmet>
+      <div className="anime-roulette">
+        <h2>Рулетка Аниме</h2>
+        {activeItem && (
+          <Link to={`/anime/${activeItem.id}`}>
+            <div className="selected-item">
+              <img
+                src={`https://shikimori.one${activeItem.image}`}
+                alt={activeItem.russian}
+              />
+            </div>
+          </Link>
+        )}
+        <button className="spin-button" onClick={startSpin}>
+          Крутить
+        </button>
+      </div>
+    </>
   );
 };
 
