@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Button = ({ label, onClick, link, className = "", children }) => {
+export const UiButton = ({ onClick, link, className = "", children }) => {
   return (
     <Link
       to={link}
@@ -14,9 +14,6 @@ const Button = ({ label, onClick, link, className = "", children }) => {
          dark:hover:border-fuchsia-700 ${className}`}
     >
       {children}
-      {label}
     </Link>
   );
 };
-
-export default Button;

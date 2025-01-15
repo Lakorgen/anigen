@@ -1,8 +1,8 @@
 import React from "react";
 import ThemeToggle from "./ThemeToggle";
-import Button from "./Button";
+import { UiButton } from "./uikit/UiButton";
 
-const ProfileTop = ({ userEmail, onThemeToggle, isAuth, onLogout }) => {
+const ProfileTop = ({ userEmail, isAuth, onLogout }) => {
   return (
     <div className="flex flex-col sm:flex-row rounded-lg py-5 px-6 bg-white dark:bg-zinc-900 border border-solid border-zinc-200 dark:border-zinc-800 shadow-md items-center shrink-0 gap-4 mb-5 justify-between ">
       <div className="flex items-center shrink-0 gap-4">
@@ -25,23 +25,7 @@ const ProfileTop = ({ userEmail, onThemeToggle, isAuth, onLogout }) => {
       </div>
       <div className="flex gap-2.5">
         <ThemeToggle />
-        {/* <button onClick={onThemeToggle} className="profile__btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20px"
-            height="20px"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-5 h-5 text-color-muted"
-          >
-            <path
-              fillRule="evenodd"
-              d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </button> */}
-        <Button link="/random">
+        <UiButton link="/random">
           <svg
             fill="currentColor"
             version="1.1"
@@ -57,11 +41,11 @@ const ProfileTop = ({ userEmail, onThemeToggle, isAuth, onLogout }) => {
   	c0-0.552,0.448-1,1-1h16c0.552,0,1,0.448,1,1v11h11C30.552,13,31,13.448,31,14z M3,17h11v-3h3V3H3V17z M29,15H15v14h14V15z"
             />
           </svg>
-        </Button>
+        </UiButton>
         {isAuth ? (
-          <Button onClick={onLogout} label="Выйти" />
+          <UiButton onClick={onLogout}>Выйти</UiButton>
         ) : (
-          <Button link="/login" label="Войти" />
+          <UiButton link="/login" label="Войти" />
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Button from "./Button";
+import { UiButton } from "./uikit/UiButton";
 
 function ThemeToggle() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -14,7 +14,7 @@ function ThemeToggle() {
   };
 
   return (
-    <Button onClick={toggleTheme}>
+    <UiButton onClick={toggleTheme}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
@@ -29,7 +29,7 @@ function ThemeToggle() {
           clipRule="evenodd"
         ></path>
       </svg>
-    </Button>
+    </UiButton>
   );
 }
 

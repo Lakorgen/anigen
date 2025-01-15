@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import transition from "../transition";
-import Button from "../components/Button";
+import { UiButton } from "../components/uikit/UiButton";
 
 const AnimeRoulette = () => {
   const [animeList, setAnimeList] = useState([]); // Список аниме
@@ -93,7 +93,9 @@ const AnimeRoulette = () => {
             </div>
           </Link>
         )}
-        <Button label="Крутить" onClick={startSpin} className="mt-4" />
+        <UiButton onClick={startSpin} className="mt-4">
+          Крутить
+        </UiButton>
       </div>
     </>
   );

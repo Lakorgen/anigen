@@ -1,6 +1,6 @@
 import React from "react";
 import { clsx } from "clsx";
-import Button from "../Button";
+import { UiButton } from "../uikit/UiButton";
 
 const TrailerBanner = ({ title, description }) => {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
@@ -31,7 +31,12 @@ const TrailerBanner = ({ title, description }) => {
       />
       <div className="absolute top-0 left-0 w-full h-full z-[1] flex justify-stretch items-end p-2.5 bg-custom-gradient">
         <div className="w-full flex items-center justify-center">
-          <Button label="ATTACK ON TITAN" link={`/anime/40028`} className="bg-transparent dark:bg-transparent font-semibold text-white" />
+          <UiButton
+            link={`/anime/40028`}
+            className="bg-transparent dark:bg-transparent font-semibold text-white"
+          >
+            ATTACK ON TITAN
+          </UiButton>
         </div>
       </div>
     </div>
