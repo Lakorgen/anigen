@@ -1,45 +1,37 @@
-import styles from "./TrailerBanner.module.scss";
-import { Link } from "react-router-dom";
 import React from "react";
+import { clsx } from "clsx";
+import Button from "../Button";
 
 const TrailerBanner = ({ title, description }) => {
-  // const videoRef = React.useRef(null);
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   if (videoRef.current) {
-  //     videoRef.current.currentTime = 20;
-  //   }
-  // }, []);
 
   const handleVideoLoaded = () => {
     setIsVideoLoaded(true);
   };
 
   return (
-    <div className={styles.banner}>
+    <div className="relative w-full h-full rounded-lg overflow-hidden border border-solid border-zinc-300 dark:border-zinc-800">
       {!isVideoLoaded && (
         <img
           src="/img/attack.webp"
           alt="Placeholder"
-          className={styles.placeholder}
+          className="absolute inset-0 w-full h-full object-cover z-[1] opacity-100 transition-opacity"
         />
       )}
       <video
-        // ref={videoRef}
         src="/media/titan.webm"
         autoPlay
         muted
         loop
         onLoadedData={handleVideoLoaded}
-        className={`${styles.video} ${isVideoLoaded ? styles.visible : styles.hidden}`}
+        className={clsx(
+          "top-2/4 l-2/4 max-w-full min-h-full object-cover z-0 transition-opacity",
+          isVideoLoaded ? "opacity-100" : "opacity-0"
+        )}
       />
-      <div className={styles.overlay}>
-        <div className={styles.texts}>
-          {/* <h1 className={styles.title}>{title}</h1> */}
-          <Link to={`/anime/40028`} className={styles.btn}>
-            ATTACK ON TITAN
-          </Link>
+      <div className="absolute top-0 left-0 w-full h-full z-[1] flex justify-stretch items-end p-2.5 bg-custom-gradient">
+        <div className="w-full flex items-center justify-center">
+          <Button label="ATTACK ON TITAN" link={`/anime/40028`} className="bg-transparent dark:bg-transparent font-semibold text-white" />
         </div>
       </div>
     </div>

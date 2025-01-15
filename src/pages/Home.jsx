@@ -25,14 +25,14 @@ const Home = () => {
         <title>Home – Anigen</title>
       </Helmet>
       <TrailerBanner />
-      <div className="popular__cards">
+      <div className="flex gap-4 px-4 py-5 rounded-xl my-5 bg-white dark:bg-zinc-900 border border-solid border-zinc-300 dark:border-zinc-800 h-full max-h-80 overflow-scroll shadow-sm">
         {isLoading
           ? [...Array(10)].map((_, index) => (
               <Skeleton key={index} backgroundColor="#f3f3f3" />
             ))
           : items.map((item) => <Card key={item.id} {...item} />)}
       </div>
-      <p className="home__info">
+      <p className="text-zinc-800 dark:text-zinc-100">
         тут что-то когда-то будет, а пока перейдите в <b>каталог</b> или{" "}
         <b>профиль</b>
       </p>

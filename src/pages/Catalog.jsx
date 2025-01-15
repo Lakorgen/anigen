@@ -89,25 +89,24 @@ const Catalog = () => {
         <meta name="description" content="Catalog page in anigen" />
         <title>Catalog – Anigen</title>
       </Helmet>
-      <div>
-        <div className="profile">
-          <div className="profile__wrapper">
-            <SidebarCatalog
-              categoryActive={activeCategory}
-              setCategoryActive={handleCategoryChange}
-            />
-            <div className="profile__content">
-              <Search onSearch={handleSearch} />
-              <div className="profile__cards">
-                {items.map((item) => (
-                  <Card key={item.id} {...item} />
+
+      <div className="profile">
+        <div className="profile__wrapper">
+          <SidebarCatalog
+            categoryActive={activeCategory}
+            setCategoryActive={handleCategoryChange}
+          />
+          <div className="profile__content">
+            <Search onSearch={handleSearch} />
+            <div className="profile__cards">
+              {items.map((item) => (
+                <Card key={item.id} {...item} />
+              ))}
+              {isLoading &&
+                [...Array(10)].map((_, index) => (
+                  <Skeleton key={index} backgroundColor="#fff" />
                 ))}
-                {isLoading &&
-                  [...Array(10)].map((_, index) => (
-                    <Skeleton key={index} backgroundColor="#fff" />
-                  ))}
-                {error && <div>Ошибка: {error}</div>}
-              </div>
+              {error && <div>Ошибка: {error}</div>}
             </div>
           </div>
         </div>

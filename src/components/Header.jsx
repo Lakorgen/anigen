@@ -3,22 +3,28 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="header">
-      <div className="header__inner container">
-        <Link to="/" className="header__logo">
+    <header className="sticky top-0 z-50 text-zinc-950 dark:text-white w-[100vw] min-h-14 h-14 bg-white dark:bg-zinc-950 !bg-opacity-30 dark:!bg-opacity-80 backdrop-blur-md shadow-md max-[640px]:hidden">
+      <div className="grid items-center grid-cols-[150px_1fr_30px] h-full container">
+        <Link to="/" className="text-3xl font-semibold text-start">
           AniGen
         </Link>
-        <ul className="header__list">
-          <li className="header__item">
-            <Link className="header__link" to="/catalog">
+        <ul className="flex items-center mx-auto gap-8">
+          <li className="font-semibold">
+            <Link
+              className="p-1 rounded-lg transition-all relative block before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-0.5 
+           dark:before:bg-white before:bg-zinc-950 before:transition-all hover:before:w-full"
+              to="/catalog"
+            >
               Каталог
             </Link>
           </li>
-         
         </ul>
-        <Link to="/profile" className="header__profile">
+        <Link
+          to="/profile"
+          className="p-2 rounded-lg transition-all relative flex items-center justify-center before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-0.5 dark:before:bg-white before:bg-zinc-950 before:transition-all hover:before:w-full"
+        >
           <svg
-            fill="#000000"
+            fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"

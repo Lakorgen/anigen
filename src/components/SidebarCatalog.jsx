@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import clsx from "clsx";
 
 const SidebarCatalog = ({ categoryActive, setCategoryActive }) => {
   const categoriesList = {
@@ -9,17 +10,20 @@ const SidebarCatalog = ({ categoryActive, setCategoryActive }) => {
   };
 
   return (
-    <div className="sidebar">
-      <span>Списки</span>
-      <div className="sidebar__menu">
+    <div className="sticky top-0 bg-white dark:bg-zinc-900 border border-solid border-zinc-300 dark:border-zinc-800 rounded-lg px-2 py-2 z-20 max-[600px]:relative min-w-full">
+      <span className="inline-flex items-center gap-5 px-2 relative ml-2 text-xs select-none text-zinc-400 dark:text-zinc-500">
+        Списки
+      </span>
+      <div className="p-1">
         {Object.keys(categoriesList).map((categorieName, index) => (
           <div
             key={index}
             onClick={() => setCategoryActive(index)} // Вызов функции для изменения категории
-            className={
-              "sidebar__menu-item " +
-              (categoryActive === index ? "sidebar__menu-item--active" : "")
-            }
+            className={clsx(
+              "relative flex items-center px-3 py-2 text-zinc-800 dark:text-zinc-100 text-sm rounded-lg whitespace-nowrap transition-colors cursor-pointer hover:bg-fuchsia-200 dark:hover:bg-fuchsia-500 font-semibold",
+              categoryActive === index &&
+                "bg-fuchsia-400 hover:bg-fuchsia-400 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-600 !text-white"
+            )}
           >
             {categorieName}
           </div>

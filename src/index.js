@@ -8,7 +8,7 @@ import { store } from "./store";
 import "./firebase";
 
 const savedTheme = localStorage.getItem("theme") || "light";
-document.body.setAttribute("data-theme", savedTheme);
+document.documentElement.classList.toggle("dark", savedTheme === "dark");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

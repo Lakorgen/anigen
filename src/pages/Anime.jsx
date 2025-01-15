@@ -83,15 +83,15 @@ const Anime = () => {
         <meta name="description" content="Login page in anigen" />
         <title>{item.russian} – Anigen</title>
       </Helmet>
-      <div className="anime">
-        <div className="anime__header">
+      <div className="max-w-[800px] mx-auto p-5 bg-white dark:bg-zinc-900 border border-solid border-zinc-300 dark:border-zinc-800 rounded-2xl text-zinc-800 dark:text-zinc-100 shadow-sm">
+        <div className="flex items-center flex-col sm:flex-row mb-5">
           <img
             src={`https://shikimori.one${item.image.original}`}
             alt={item.name}
-            className="anime__image"
+            className="max-w-40 rounded mr-0 sm:mr-5"
           />
-          <div className="anime__title">
-            <h1>
+          <div className="text-zinc-400 dark:text-zinc-500">
+            <h1 className="text-2xl m-0 font-bold text-fuchsia-500 dark:text-fuchsia-600 opacity-100">
               {item.name} ({item.russian})
             </h1>
             <p>Рейтинг: {item.score}</p>
@@ -101,62 +101,79 @@ const Anime = () => {
             </p>
           </div>
         </div>
-        <div className="anime__status">
-          <label htmlFor="statusSelect">Добавить в список:</label>
-          <select
-            id="statusSelect"
-            value={status}
-            onChange={(e) => handleStatusChange(e.target.value)}
-          >
-            <option value="">Выберите статус</option>
-            <option value="Просмотренно">Просмотренно</option>
-            <option value="В планах">В планах</option>
-            <option value="Смотрю">Смотрю</option>
-            <option value="Брошено">Брошено</option>
-          </select>
+
+        <label htmlFor="statusSelect">Добавить в список:</label>
+        <select
+          className="border border-solid border-fuchsia-500 dark:border-fuchsia-600 bg-fuchsia-500 dark:bg-fuchsia-600 text-white font-bold text-center p-2.5 rounded-lg ml-2"
+          id="statusSelect"
+          value={status}
+          onChange={(e) => handleStatusChange(e.target.value)}
+        >
+          <option value="">Выберите статус</option>
+          <option value="Просмотренно">Просмотренно</option>
+          <option value="В планах">В планах</option>
+          <option value="Смотрю">Смотрю</option>
+          <option value="Брошено">Брошено</option>
+        </select>
+
+        <div className="mt-5">
+          <h2 className="font-bold mb-5 text-fuchsia-500 dark:text-fuchsia-600">
+            Описание
+          </h2>
+          <div
+            className="description"
+            dangerouslySetInnerHTML={{ __html: item.description_html }}
+          />
         </div>
-        <div className="anime__description">
-          <h2>Описание</h2>
-          <div dangerouslySetInnerHTML={{ __html: item.description_html }} />
-        </div>
-        <div className="anime__genres">
-          <h2>Жанры</h2>
-          <ul>
+        <div className="mt-5">
+          <h2 className="font-bold mb-5 text-fuchsia-500 dark:text-fuchsia-600">
+            Жанры
+          </h2>
+          <ul className="list-none p-0 flex flex-wrap gap-x-4 gap-y-1">
             {item.genres.map((genre) => (
-              <li key={genre.id}>
+              <li
+                key={genre.id}
+                className="text-center font-bold p-3 my-1.5 rounded bg-fuchsia-500 dark:bg-fuchsia-600 text-white -tracking-wide"
+              >
                 {genre.russian} ({genre.name})
               </li>
             ))}
           </ul>
         </div>
         <br />
-        <div className="aniime_player">
-          <h2>Смотреть онлайн</h2>
-          {!item.genres.some((genre) => genre.name === "Hentai") ? (
-            <KinoboxPlayer title={item.name} />
-          ) : (
-            <h2 className="not-available">
-              Просмотр не доступен! <br />
-              Аниме содержит недопустимый контент.
-            </h2>
-          )}
-        </div>
-        <div className="anime__screenshots">
-          <h2>Скриншоты</h2>
-          <div className="anime__screenshots-grid">
+
+        <h2 className="font-bold mb-5 text-fuchsia-500 dark:text-fuchsia-600">
+          Смотреть онлайн
+        </h2>
+        {!item.genres.some((genre) => genre.name === "Hentai") ? (
+          <KinoboxPlayer title={item.name} />
+        ) : (
+          <h2 className="text-3xl text-center text-red-500 font-bold py-20 px-10">
+            Просмотр не доступен! <br />
+            Аниме содержит недопустимый контент.
+          </h2>
+        )}
+
+        <div className="mt-5">
+          <h2 className="font-bold mb-5 text-fuchsia-500 dark:text-fuchsia-600">
+            Скриншоты
+          </h2>
+          <div className="grid [grid-template-columns:repeat(auto-fill,minmax(150px,1fr))] gap-x-10 gap-y-5">
             {item.screenshots.map((screenshot, index) => (
               <img
                 key={index}
                 src={`https://shikimori.one${screenshot.preview}`}
                 alt={`Screenshot ${index + 1}`}
-                className="anime__screenshot"
+                className="w-full rounded object-cover"
               />
             ))}
           </div>
         </div>
-        <div className="anime__similar">
-          <h2>Похожие</h2>
-          <div className="anime__similar-cards">
+        <div className="mt-5">
+          <h2 className="font-bold mb-5 text-fuchsia-500 dark:text-fuchsia-600">
+            Похожие
+          </h2>
+          <div className="flex gap-4 px-4 py-5 rounded-xl my-5 bg-white dark:bg-zinc-900 h-full max-h-80 overflow-scroll shadow-sm">
             {similar.map((item) => (
               <Card key={item.id} {...item} />
             ))}

@@ -27,10 +27,10 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <MobileMenu />
       <Header />
-      <div className="content">
+      <div className="mt-5 mb-20">
         <div className="container">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -46,8 +46,8 @@ function App() {
           </AnimatePresence>
         </div>
       </div>
-      <footer></footer>
-    </div>
+      {/* <footer></footer> */}
+    </>
   );
 }
 

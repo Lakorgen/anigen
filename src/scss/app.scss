@@ -1,16 +1,4 @@
-@import "./components/all.scss";
-
-a,
-button {
-  outline: none; // Убирает рамку вокруг элемента
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  background-color: var(--bg-color);
-  position: relative;
-  overflow-x: hidden;
-}
+// @import "./components/all.scss";
 
 .blurred-balls {
   position: fixed;
@@ -47,139 +35,7 @@ body {
   }
 }
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-  z-index: 4;
-}
-
-.container {
-  max-width: 1200px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 15px;
-}
-
-.content {
-  margin-top: 20px;
-  margin-bottom: 80px;
-}
-
-.home {
-  &__info {
-    color: var(--text-color);
-  }
-}
-
-.popular {
-  &__cards {
-    display: flex;
-    gap: 16px;
-    padding: 22px 15px;
-    height: 100%;
-    max-height: 320px;
-    background-color: var(--bg-card-color);
-    border-radius: 12px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow: scroll;
-  }
-}
-
 .profile {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  &__top {
-    display: flex;
-    border-radius: 8px;
-    padding: 22px 26px;
-
-    background-color: var(--bg-card-color);
-    align-items: center;
-    flex-shrink: 0;
-    gap: 16px;
-    margin-bottom: 20px;
-    justify-content: space-between;
-
-    @media (max-width: 500px) {
-      flex-direction: column;
-    }
-  }
-
-  &__left {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    gap: 16px;
-  }
-
-  &__img {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    img {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      object-position: cover;
-    }
-  }
-  &__info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  &__name {
-    font-size: 12px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 220px;
-    font-weight: 500;
-    color: var(--mauve-600);
-  }
-  &__lvl {
-    width: 100%;
-    color: var(--text-color);
-    opacity: 0.6;
-    font-size: 12px;
-  }
-
-  &__btns {
-    display: flex;
-    gap: 10px;
-  }
-
-  &__btn {
-    background: var(--bg-card-color);
-    padding: 8px 14px;
-    border: var(--mauve-500) 1px solid;
-    color: var(--mauve-500);
-    border-radius: 8px;
-    font-size: 14px;
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    path {
-      fill: var(--mauve-500);
-      transition: all 0.2s ease-in-out;
-    }
-
-    &:hover {
-      border: var(--mauve-700) 1px solid;
-      color: var(--mauve-700);
-      path {
-        fill: var(--mauve-700);
-      }
-    }
-  }
-
   &__wrapper {
     display: grid;
     gap: 20px;
@@ -187,68 +43,13 @@ body {
     //   "sidebar search"
     //   "sidebar content";
     // grid-template-rows: auto 1fr;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 200px 1fr;
     align-items: flex-start;
     position: relative;
 
     @media (max-width: 600px) {
       display: flex;
       flex-direction: column;
-    }
-  }
-  .sidebar {
-    position: sticky;
-    top: 0;
-    background-color: var(--bg-card-color);
-    border-radius: 10px;
-    padding: 5px 3px;
-    z-index: 20;
-    // top: calc(56px + 20px);
-
-    @media (max-width: 600px) {
-      position: relative;
-      top: 0;
-      width: 100%;
-    }
-
-    span {
-      display: inline-flex;
-      align-items: center;
-      gap: 20px;
-      padding: 0 8px;
-      position: relative;
-      margin-left: 8px;
-      font-size: 12px;
-      line-height: 20px;
-      user-select: none;
-      color: var(--text-color);
-      opacity: 0.6;
-    }
-
-    &__menu {
-      padding: 4px;
-      &-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding: 8px 14px;
-        color: var(--mauve-950);
-        font-size: 14px;
-        line-height: 1.2;
-        border-radius: 8px;
-        white-space: nowrap;
-        text-decoration: none;
-        transition: color 0.2s ease, background 0.2s ease;
-        cursor: pointer;
-
-        &:hover {
-          background: var(--bg-sidebar-hover);
-        }
-
-        &--active {
-          background: var(--bg-sidebar-active);
-        }
-      }
     }
   }
   &__content {
@@ -274,203 +75,6 @@ body {
   }
 }
 
-.anime {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--bg-card-color);
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  color: var(--text-color);
-
-  h2 {
-    color: var(--mauve-500);
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-
-  &__header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    @media (max-width: 500px) {
-      flex-direction: column;
-    }
-  }
-
-  &__image {
-    max-width: 150px;
-    border-radius: 4px;
-    margin-right: 20px;
-  }
-
-  &__title {
-    h1 {
-      font-size: 24px;
-      margin: 0;
-      font-weight: 600;
-      color: var(--mauve-600);
-    }
-
-    p {
-      margin: 5px 0;
-      color: var(--text-color);
-      opacity: 0.6;
-    }
-  }
-
-  &__status {
-    select {
-      margin-left: 5px;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #dcdcdc;
-    }
-  }
-
-  &__description,
-  &__genres,
-  &__videos,
-  &__screenshots,
-  &__similar {
-    margin-top: 20px;
-  }
-
-  &__description {
-    a {
-      color: var(--mauve-500);
-    }
-  }
-
-  &__genres {
-    ul {
-      list-style-type: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px 16px;
-
-      li {
-        background-color: var(--mauve-400);
-        border-radius: 10px;
-        text-align: center;
-
-        color: var(--text-color-white);
-        font-weight: 600;
-        letter-spacing: -0.2px;
-        padding: 10px;
-        margin: 5px 0;
-        border-radius: 4px;
-      }
-    }
-  }
-
-  &__screenshots {
-    h2 {
-      margin-bottom: 10px;
-    }
-
-    &-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 20px 50px;
-    }
-  }
-  &__screenshot {
-    width: 100%;
-    border-radius: 4px;
-    object-fit: cover;
-  }
-
-  &__similar {
-    h2 {
-      margin-bottom: 10px;
-    }
-
-    &-cards {
-      display: flex;
-      gap: 16px;
-      padding: 10px 5px;
-      min-height: 220px;
-      background-color: var(--bg-card-color);
-      border-radius: 12px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      overflow: scroll;
-    }
-  }
-}
-
-.not-available{
-  font-size: 30px;
-  text-align: center;
-  color: red !important;
-}
-
-.anime-roulette {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: var(--bg-card-color);
-  color: var(--text-color);
-  width: 300px;
-  margin: 0 auto;
-  border-radius: 10px;
-
-  h2 {
-    margin-bottom: 10px;
-    font-weight: 500;
-    font-size: 20px;
-  }
-}
-
-.selected-item {
-  position: relative;
-  padding-top: 140%;
-  max-width: 100%;
-  width: 200px;
-  border-radius: 6px;
-  overflow: hidden;
-
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: inherit;
-    object-fit: cover;
-    object-position: center;
-    opacity: 1;
-    transition: opacity 0.15s ease-in;
-  }
-}
-
-.spin-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: var(--bg-card-color);
-  border-radius: 8px;
-  color: var(--mauve-500);
-  border: 1px solid var(--mauve-500);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.spin-button:hover {
-  color: var(--mauve-700);
-  border: 1px solid var(--mauve-700);
-}
-
-.kinobox_iframe_wrapper {
-  // z-index: 1 !important;
-}
-
 .slide-in,
 .slide-out {
   position: fixed;
@@ -478,17 +82,18 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--bg-color);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
   transform-origin: left;
+  @apply bg-zinc-100
+  dark:bg-zinc-950;
 
   &-text {
     font-size: 6vw;
-    color: var(--text-color);
     font-weight: 700;
+    @apply text-zinc-800 dark:text-zinc-100;
   }
 }
 

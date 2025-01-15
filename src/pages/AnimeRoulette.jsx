@@ -5,6 +5,7 @@ import { db } from "../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import transition from "../transition";
+import Button from "../components/Button";
 
 const AnimeRoulette = () => {
   const [animeList, setAnimeList] = useState([]); // Список аниме
@@ -50,7 +51,7 @@ const AnimeRoulette = () => {
     }
 
     const totalTime = 3000; // Общее время в миллисекундах
-    const intervalTime = 100; // Время изменения в миллисекундах
+    const intervalTime = 400; // Время изменения в миллисекундах
 
     intervalRef.current = setInterval(() => {
       if (animeList.length > 0) {
@@ -77,21 +78,22 @@ const AnimeRoulette = () => {
         <meta name="description" content="Catalog page in anigen" />
         <title>Random anime – Anigen</title>
       </Helmet>
-      <div className="anime-roulette">
-        <h2>Рулетка Аниме</h2>
+      <div className="flex flex-col items-center justify-center p-5 bg-white dark:bg-zinc-900 border border-solid border-zinc-300 dark:border-zinc-800 w-72 mx-auto rounded-lg shadow-sm ">
+        <h2 className="font-bold mb-3 text-lg text-zinc-800 dark:text-zinc-100">
+          Рулетка Аниме
+        </h2>
         {activeItem && (
           <Link to={`/anime/${activeItem.id}`}>
-            <div className="selected-item">
+            <div className="relative pt-[140%] max-w-full w-48 rounded-md overflow-hidden">
               <img
                 src={`https://shikimori.one${activeItem.image}`}
                 alt={activeItem.russian}
+                className="absolute top-0 left-0 w-full h-full block object-cover object-center opacity-100 transition-opacity"
               />
             </div>
           </Link>
         )}
-        <button className="spin-button" onClick={startSpin}>
-          Крутить
-        </button>
+        <Button label="Крутить" onClick={startSpin} className="mt-4" />
       </div>
     </>
   );
