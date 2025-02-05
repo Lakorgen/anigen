@@ -16,7 +16,7 @@ export const animeAPI = {
   },
   getPopularAnime() {
     return instance.get(
-      "animes?order=ranked&status=ongoing&season=2024&limit=10"
+      "animes?order=ranked&status=ongoing&limit=10"
     );
   },
   getSimilarAnime(id) {

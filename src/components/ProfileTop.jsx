@@ -45,7 +45,7 @@ const ProfileTop = ({ userEmail, isAuth, onLogout }) => {
         {isAuth ? (
           <UiButton onClick={onLogout}>Выйти</UiButton>
         ) : (
-          <UiButton link="/login" label="Войти" />
+          <UiButton link="/login">Войти</UiButton>
         )}
       </div>
     </div>
