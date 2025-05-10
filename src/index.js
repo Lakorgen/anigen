@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
 import { store } from "./store";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import "./firebase";
 
 const savedTheme = localStorage.getItem("theme") || "light";
@@ -18,3 +19,4 @@ root.render(
     </Provider>
   </BrowserRouter>
 );
+serviceWorkerRegistration.register();
